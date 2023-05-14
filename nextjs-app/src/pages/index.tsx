@@ -125,7 +125,7 @@ const Index = (props: any) => {
           </Link>
         </div>
       </div>
-      <div className="bg-gradient-to-r from-stone-800 to-stone-900 pt-4 pb-20 text-white/80">
+      <div className="bg-gradient-to-r from-stone-800 to-stone-900 pb-20 pt-4 text-white/80">
         <p className="py-4 text-center text-3xl font-medium">Upcoming Events</p>
         <div className="mx-auto grid max-w-[900px] grid-cols-1 items-end gap-1 sm:grid-cols-2 lg:grid-cols-3">
           {props.upcomingEvents
