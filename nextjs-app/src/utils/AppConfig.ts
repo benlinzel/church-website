@@ -3,6 +3,6 @@
 export const AppConfig = {
   site_name: 'WGC',
   title: 'Winona Gospel Church',
-  description: 'Starter code for your Nextjs Boilerplate with Tailwind CSS',
+  description: 'Winona Gospel Church',
   locale: 'en',
 };
