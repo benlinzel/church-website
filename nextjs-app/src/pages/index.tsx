@@ -1,13 +1,13 @@
-import { PortableText } from '@portabletext/react';
-import Link from 'next/link';
+import { PortableText } from "@portabletext/react";
+import Link from "next/link";
 
-import Footer from '@/components/footer';
-import Navbar from '@/components/navbar';
+import Footer from "@/components/footer";
+import Navbar from "@/components/navbar";
 import {
   client,
   myPortableTextComponentsNoMargin,
   urlFor,
-} from '@/utils/SanityConfig';
+} from "@/utils/SanityConfig";
 
 interface UpcomingEventProps {
   title: string;
@@ -20,12 +20,12 @@ const UpcomingEvent = (props: UpcomingEventProps) => {
     <div className="mx-auto w-[80%] px-4 pt-4 text-center sm:w-[90%]">
       <p className="text-xl font-medium">{props.title}</p>
       <p className="pb-2 font-extralight text-amber-500">
-        {new Date(props.date).toLocaleDateString('en-US', {
-          weekday: 'long',
-          year: 'numeric',
-          month: 'short',
-          day: 'numeric',
-          timeZone: 'UTC',
+        {new Date(props.date).toLocaleDateString("en-US", {
+          weekday: "long",
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+          timeZone: "UTC",
         })}
       </p>
       {/* <p className="pt-2 font-light text-white/60">{props.description}</p> */}
@@ -125,23 +125,27 @@ const Index = (props: any) => {
           </Link>
         </div>
       </div>
-      <div className="bg-gradient-to-r from-stone-800 to-stone-900 pb-20 pt-4 text-white/80">
-        <p className="py-4 text-center text-3xl font-medium">Upcoming Events</p>
-        <div className="mx-auto grid max-w-[900px] grid-cols-1 items-end gap-1 sm:grid-cols-2 lg:grid-cols-3">
-          {props.upcomingEvents
-            .slice(0, process.env.NEXT_PUBLIC_UPCOMING_EVENTS_LIMIT)
-            .map((upcomingEvent: UpcomingEventProps) => {
-              return (
-                <UpcomingEvent
-                  key={upcomingEvent.title + upcomingEvent.date}
-                  title={upcomingEvent.title}
-                  date={upcomingEvent.date}
-                  description={upcomingEvent.description}
-                />
-              );
-            })}
+      {props.upcomingEvents.length > 0 && (
+        <div className="bg-gradient-to-r from-stone-800 to-stone-900 pb-20 pt-4 text-white/80">
+          <p className="py-4 text-center text-3xl font-medium">
+            Upcoming Events
+          </p>
+          <div className="mx-auto grid max-w-[900px] grid-cols-1 items-end gap-1 sm:grid-cols-2 lg:grid-cols-3">
+            {props.upcomingEvents
+              .slice(0, process.env.NEXT_PUBLIC_UPCOMING_EVENTS_LIMIT)
+              .map((upcomingEvent: UpcomingEventProps) => {
+                return (
+                  <UpcomingEvent
+                    key={upcomingEvent.title + upcomingEvent.date}
+                    title={upcomingEvent.title}
+                    date={upcomingEvent.date}
+                    description={upcomingEvent.description}
+                  />
+                );
+              })}
+          </div>
         </div>
-      </div>
+      )}
       <Footer siteSettings={props.siteSettings} />
     </div>
   );
@@ -151,7 +155,7 @@ export async function getStaticProps() {
   const today = new Date();
   const yesterday = new Date(today);
   yesterday.setDate(yesterday.getDate() - 1);
-  const yesterdayFormatted = yesterday.toISOString().split('T')[0];
+  const yesterdayFormatted = yesterday.toISOString().split("T")[0];
 
   const siteSettings = await client
     .fetch(`*[_id == "siteSettings"]`)

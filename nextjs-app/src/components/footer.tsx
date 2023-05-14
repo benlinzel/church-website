@@ -21,7 +21,7 @@ const Footer = (props: any) => {
             <p>
               <Link
                 href={`tel:${props.siteSettings.footerContactPhone}`}
-                className="text-white"
+                className="text-white hover:text-amber-500 hover:underline"
               >
                 {formatPhoneNumber(props.siteSettings.footerContactPhone)}
               </Link>
@@ -29,7 +29,7 @@ const Footer = (props: any) => {
             <p>
               <Link
                 href={`mailto:${props.siteSettings.footerContactEmail}`}
-                className="text-white"
+                className="text-white hover:text-amber-500 hover:underline"
               >
                 {props.siteSettings.footerContactEmail}
               </Link>
