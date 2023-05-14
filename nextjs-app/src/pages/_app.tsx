@@ -17,6 +17,8 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
         title: AppConfig.title,
         description: AppConfig.description,
       }}
+      title={AppConfig.title}
+      description={AppConfig.description}
       // twitter={{
       //   handle: "@handle",
       //   site: "@site",
