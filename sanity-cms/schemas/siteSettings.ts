@@ -67,6 +67,11 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'newsletterSignupFormLink',
+      title: 'Newsletter Sign-Up Form Link',
+      type: 'string',
+    }),
+    defineField({
       name: 'etransferEmail',
       title: 'E-Transfer Email',
       type: 'string',
