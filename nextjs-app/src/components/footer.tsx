@@ -1,9 +1,9 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import { AppConfig } from "@/utils/AppConfig";
+import { AppConfig } from '@/utils/AppConfig';
 
 const formatPhoneNumber = (phoneNumberString: string) => {
-  const cleaned = `${phoneNumberString}`.replace(/\D/g, "");
+  const cleaned = `${phoneNumberString}`.replace(/\D/g, '');
   const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
   if (match) {
     return `(${match[1]}) ${match[2]}-${match[3]}`;
@@ -42,7 +42,7 @@ const Footer = (props: any) => {
           </div>
         </div>
         <div>
-          <p className="text-amber-500 pb-2 text-center">
+          <p className="pb-2 text-center text-amber-500">
             <Link
               href={props.siteSettings.newsletterSignupFormLink}
               className="text-amber-500 hover:underline"
