@@ -1,8 +1,8 @@
 import '../styles/global.css';
 
 import { Analytics } from '@vercel/analytics/react';
-import type { AppProps } from 'next/app';
 import { DefaultSeo } from 'next-seo';
+import type { AppProps } from 'next/app';
 
 import { AppConfig } from '@/utils/AppConfig';
 
@@ -16,6 +16,15 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
         siteName: AppConfig.site_name,
         title: AppConfig.title,
         description: AppConfig.description,
+        images: [
+          {
+            url: 'https://winonagospelchurch.com/assets/images/wgc-black-logo.jpeg',
+            width: 800,
+            height: 500,
+            alt: 'WGC Logo',
+            type: 'image/jpeg',
+          },
+        ],
       }}
       title={AppConfig.title}
       description={AppConfig.description}
