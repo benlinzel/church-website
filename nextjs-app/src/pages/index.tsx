@@ -47,13 +47,26 @@ const HoveringPlayer = (props: any) => {
           <p className=" text-3xl text-white">Passage / Sermon Title</p>
           <p className="font-extralight">Jan 29 2023</p> */}
           <Link
-            className="mx-auto rounded-lg border-amber-500 bg-stone-700 p-2 text-xl text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:border group-hover:-translate-y-1 group-hover:scale-110 group-hover:text-amber-500 group-hover:drop-shadow-2xl"
+            className="mx-auto rounded-lg border-amber-500 bg-stone-700 px-2 text-xl text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:border group-hover:-translate-y-1 group-hover:scale-110 group-hover:text-amber-500 group-hover:drop-shadow-2xl"
             href={props.siteSettings.youtubeLink}
           >
             <span className="ml-1 flex items-center justify-between">
-              <span>Watch Now</span>
+              <span>Watch</span>
               <img
                 src="/assets/icons/youtube.svg"
+                alt=""
+                className="ml-1 h-10 w-10"
+              />
+            </span>
+          </Link>
+          <Link
+            className="mx-auto mt-2 rounded-lg border-amber-500 bg-stone-700 px-2 text-xl text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:border group-hover:translate-y-1 group-hover:scale-110 group-hover:text-amber-500 group-hover:drop-shadow-2xl"
+            href={props.siteSettings.podcastLink}
+          >
+            <span className="ml-1 flex items-center justify-between">
+              <span>Listen</span>
+              <img
+                src="/assets/icons/headphones.svg"
                 alt=""
                 className="ml-1 h-10 w-10"
               />
