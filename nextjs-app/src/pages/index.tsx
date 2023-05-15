@@ -50,7 +50,7 @@ const HoveringPlayer = (props: any) => {
             className="mx-auto rounded-lg border-amber-500 bg-stone-700 p-2 text-xl text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:border group-hover:-translate-y-1 group-hover:scale-110 group-hover:text-amber-500 group-hover:drop-shadow-2xl"
             href={props.siteSettings.youtubeLink}
           >
-            <span className="flex items-center justify-between ml-1">
+            <span className="ml-1 flex items-center justify-between">
               <span>Watch Now</span>
               <img
                 src="/assets/icons/youtube.svg"
@@ -78,7 +78,7 @@ const BlockPlayer = (props: any) => {
           className="mx-auto rounded-lg border-amber-500 bg-stone-700 p-2 text-xl text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:border hover:text-amber-500 hover:drop-shadow-2xl"
           href={props.siteSettings.youtubeLink}
         >
-          <span className="flex items-center justify-between ml-1">
+          <span className="ml-1 flex items-center justify-between">
             <span>Watch Now</span>
             <img
               src="/assets/icons/youtube.svg"
@@ -113,7 +113,7 @@ const Index = (props: any) => {
           <p className="font-light">{props.siteSettings.serviceTime}</p>
           <Link href={props.siteSettings.addressLink}>
             <span className="group flex items-center justify-between font-light text-black ">
-              <span className="text-base group-hover:decoration-amber-500 group-hover:underline md:text-2xl">
+              <span className="text-base group-hover:underline group-hover:decoration-amber-500 md:text-2xl">
                 218 Glover Road, Stoney Creek, ON L8E 5H6
               </span>
               <img

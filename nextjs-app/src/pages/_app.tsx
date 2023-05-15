@@ -1,8 +1,8 @@
 import '../styles/global.css';
 
 import { Analytics } from '@vercel/analytics/react';
-import { DefaultSeo } from 'next-seo';
 import type { AppProps } from 'next/app';
+import { DefaultSeo } from 'next-seo';
 
 import { AppConfig } from '@/utils/AppConfig';
 
