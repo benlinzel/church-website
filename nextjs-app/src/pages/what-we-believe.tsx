@@ -15,7 +15,7 @@ const WhatWeBelieve = (props: any) => {
           What We Believe
         </p>
         <div className="mx-auto max-w-[900px] space-y-4 px-8 pb-8">
-          <p className="pt-8 text-3xl text-white">Doctrinal Statement</p>
+          {/* <p className="pt-8 text-3xl text-white">Doctrinal Statement</p>
           <p className="text-base font-normal">
             <span className="text-2xl font-light text-amber-500">I</span>
             <p>
@@ -63,7 +63,7 @@ const WhatWeBelieve = (props: any) => {
               such lapses bring serious loss to both the individual and the
               Church.
             </p>
-          </p>
+          </p> */}
           <p className="pt-8 text-3xl text-white">
             21 Articles of Faith and Doctrine
           </p>
