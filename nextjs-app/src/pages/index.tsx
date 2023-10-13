@@ -172,7 +172,9 @@ const Index = (props: any) => {
           </div>
         </div>
       )}
-      <Footer siteSettings={props.siteSettings} />
+      <div className="absolute inset-x-0 bottom-0">
+        <Footer siteSettings={props.siteSettings} />
+      </div>
     </div>
   );
 };

@@ -12,7 +12,7 @@ const SmallGroups = (props: any) => {
         <p className="py-4 text-center text-4xl font-semibold text-white md:text-5xl">
           Small Groups
         </p>
-        <div className="mx-auto grid max-w-[900px] grid-cols-1 items-end gap-8 px-8 sm:grid-cols-2">
+        <div className="mx-auto max-w-[900px] space-y-8 px-8 pb-8">
           {props.smallGroups
             .filter((smallGroup: any) => smallGroup.title)
             .map((smallGroup: any) => {
