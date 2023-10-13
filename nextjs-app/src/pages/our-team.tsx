@@ -15,7 +15,7 @@ const OurTeam = (props: any) => {
         <p className="pt-4 text-center text-4xl font-semibold text-white md:text-5xl">
           Our Team
         </p>
-        <div className="mx-auto grid max-w-[900px] grid-cols-2 p-2 md:grid-cols-3">
+        <div className="mx-auto grid max-w-[900px] grid-cols-1 p-2 md:grid-cols-2">
           {props.teamMembers
             .filter((teamMember: any) => teamMember.name && teamMember.title)
             .map((teamMember: any) => {
