@@ -5,20 +5,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "build-stats": "cross-env ANALYZE=true npm run build",
     "export": "next export",
     "build-prod": "run-s clean build export",
-    "clean": "rimraf .next out",
-    "lint": "next lint",
-    "format": "next lint --fix && prettier '**/*.{json,yaml}' --write --ignore-path .gitignore",
-    "check-types": "tsc --noEmit --pretty && tsc --project cypress --noEmit --pretty",
-    "test": "jest",
-    "commit": "cz",
-    "cypress": "cypress open",
-    "cypress:headless": "cypress run",
-    "e2e": "start-server-and-test dev http://localhost:3000 cypress",
-    "e2e:headless": "start-server-and-test dev http://localhost:3000 cypress:headless",
-    "postbuild": "next-sitemap"
+    "lint": "next lint"
   },
   "dependencies": {
     "@portabletext/react": "^2.0.1",
