@@ -20,7 +20,7 @@ const OurTeam = (props: any) => {
             .filter((teamMember: any) => teamMember.name && teamMember.title)
             .map((teamMember: any) => {
               return (
-                <div key={teamMember} className="mx-4 py-4">
+                <div key={teamMember.name} className="mx-4 py-4">
                   {teamMember.headshot ? (
                     <Image
                       src={urlFor(teamMember.headshot)
