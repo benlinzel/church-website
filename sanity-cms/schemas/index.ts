@@ -5,14 +5,14 @@ import youthMinistry from './ministry-youth'
 // import mission from './mission'
 import siteSettings from './siteSettings'
 import smallGroup from './smallGroup'
+import statement from './statement'
 import teamMember from './teamMember'
 import upcomingEvent from './upcomingEvent'
-import value from './value'
 
 export const schemaTypes = [
   blockContent,
   upcomingEvent,
-  value,
+  statement,
   teamMember,
   smallGroup,
   // mission,
