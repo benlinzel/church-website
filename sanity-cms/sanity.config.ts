@@ -38,7 +38,7 @@ export default defineConfig({
             S.documentTypeListItem('teamMember').title('Team Members'),
             // S.documentTypeListItem('mission').title('Missions'),
             S.documentTypeListItem('faithArticle').title('Articles of Faith'),
-            S.documentTypeListItem('churchValue').title('Church Values'),
+            S.documentTypeListItem('statement').title('Statements We Support'),
 
             S.listItem()
               .title('Site Settings')

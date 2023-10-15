@@ -1,13 +1,18 @@
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
-  name: 'churchValue',
-  title: 'Church Value',
+  name: 'statement',
+  title: 'Statements We Support',
   type: 'document',
   fields: [
     defineField({
       name: 'title',
       title: 'Title',
+      type: 'string',
+    }),
+    defineField({
+      name: 'link',
+      title: 'Link',
       type: 'string',
     }),
     defineField({

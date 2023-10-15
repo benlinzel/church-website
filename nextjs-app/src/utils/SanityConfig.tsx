@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { createClient } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
 import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
@@ -18,7 +19,7 @@ export function urlFor(source: SanityImageSource) {
 export const myPortableTextComponentsNoMargin = {
   types: {
     image: ({ value }: any) => {
-      return <img src={urlFor(value?.asset?._ref).url()} />;
+      return <img src={urlFor(value?.asset?._ref).url()} alt='image' />;
     },
     code: (prop: any) => (
       <pre data-language={prop.node.language}>
@@ -46,17 +47,13 @@ export const myPortableTextComponentsNoMargin = {
         {children}
       </blockquote>
     ),
-    // Ex. 2: rendering custom styles
-    // customHeading: ({ children }) => (
-    //   <h2 className="text-primary text-lg text-purple-700">{children}</h2>
-    // ),
   },
 };
 
 export const myPortableTextComponents = {
   types: {
     image: ({ value }: any) => {
-      return <img src={urlFor(value?.asset?._ref).url()} />;
+      return <img src={urlFor(value?.asset?._ref).url()} alt='image' />;
     },
     code: (prop: any) => (
       <pre data-language={prop.node.language}>
@@ -84,27 +81,5 @@ export const myPortableTextComponents = {
         {children}
       </blockquote>
     ),
-    // Ex. 2: rendering custom styles
-    // customHeading: ({ children }) => (
-    //   <h2 className="text-primary text-lg text-purple-700">{children}</h2>
-    // ),
   },
 };
-
-// const missionsImages = {
-//   types: {
-//     image: ({ value }: any) => {
-//       return (
-//         <img
-//           className="mx-auto max-h-[400px]"
-//           src={urlFor(value?.asset?._ref).url()}
-//         />
-//       );
-//     },
-//   },
-// };
-
-// export const myPortableTextComponentsMissions = {
-//   ...myPortableTextComponents,
-//   ...missionsImages,
-// };
