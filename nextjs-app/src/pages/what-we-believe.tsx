@@ -60,7 +60,7 @@ export async function getStaticProps() {
       siteSettings,
       faithArticles,
     },
-    revalidate: 60,
+    // revalidate: 60,
   };
 }
 

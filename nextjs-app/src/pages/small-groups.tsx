@@ -65,7 +65,7 @@ export async function getStaticProps() {
       siteSettings,
       smallGroups,
     },
-    revalidate: 60,
+    // revalidate: 60,
   };
 }
 

@@ -45,7 +45,7 @@ export async function getStaticProps() {
       siteSettings,
       childrensMinistry,
     },
-    revalidate: 60,
+    // revalidate: 60,
   };
 }
 

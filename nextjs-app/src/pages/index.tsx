@@ -197,7 +197,7 @@ export async function getStaticProps() {
       siteSettings,
       upcomingEvents,
     },
-    revalidate: 60,
+    // revalidate: 60,
   };
 }
 

@@ -39,7 +39,7 @@ export async function getStaticProps() {
     props: {
       siteSettings,
     },
-    revalidate: 60,
+    // revalidate: 60,
   };
 }
 
