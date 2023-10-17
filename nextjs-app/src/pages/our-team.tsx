@@ -73,7 +73,7 @@ export async function getStaticProps() {
       siteSettings,
       teamMembers,
     },
-    revalidate: 60,
+    // revalidate: 60,
   };
 }
 
