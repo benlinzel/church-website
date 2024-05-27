@@ -193,14 +193,15 @@ export async function getStaticProps() {
       return settings[0];
     });
   const upcomingEvents = await client.fetch(
-    `*[_type == "upcomingEvent" && date >= '${yesterdayFormatted}'] | order(date asc)`
+    `*[_type == "upcomingEvent" && date >= '${yesterdayFormatted}'] | order(date asc)`,
+    { next: { revalidate: 86400 } }
   );
   return {
     props: {
       siteSettings,
       upcomingEvents,
     },
-    // revalidate: 60,
+    revalidate: 86400,
   };
 }
 
