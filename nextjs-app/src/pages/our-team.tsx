@@ -29,8 +29,8 @@ const OurTeam = (props: any) => {
                         .url()}
                       alt="headshot"
                       className="mx-auto rounded-lg"
-                      width={200}
-                      height={200}
+                      width={300}
+                      height={300}
                     ></Image>
                   ) : (
                     <div className="h-[200px]"></div>
