@@ -183,9 +183,7 @@ const Index = (props: any) => {
 
 export async function getStaticProps() {
   const today = new Date();
-  const yesterday = new Date(today);
-  yesterday.setDate(yesterday.getDate() - 1);
-  const yesterdayFormatted = yesterday.toISOString().split("T")[0];
+  const todayFormatted = today.toISOString().split("T")[0];
 
   const siteSettings = await client
     .fetch(`*[_id == "siteSettings"]`)
@@ -193,14 +191,14 @@ export async function getStaticProps() {
       return settings[0];
     });
   const upcomingEvents = await client.fetch(
-    `*[_type == "upcomingEvent" && date >= '${yesterdayFormatted}'] | order(date asc)`
+    `*[_type == "upcomingEvent" && date >= '${todayFormatted}'] | order(date asc)`
   );
   return {
     props: {
       siteSettings,
       upcomingEvents,
     },
-    revalidate: 86400,
+    revalidate: 43200,
   };
 }
 
