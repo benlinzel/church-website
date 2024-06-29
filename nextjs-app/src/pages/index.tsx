@@ -41,14 +41,13 @@ const UpcomingEvent = (props: UpcomingEventProps) => {
 
 const HoveringPlayer = (props: any) => {
   return (
-    <div className="mx-auto hidden h-full p-8 md:block md:w-1/2">
-      <div className="h-[420px] flex gap-x-8 2xl:gap-x-16 items-center justify-center rounded-2xl drop-shadow-2xl">
-
+    <div className="mx-auto h-full p-8 w-1/2">
+      <div className="h-[300px] md:h-[420px] flex flex-col md:flex-row gap-y-4 gap-x-8 2xl:gap-x-16 items-center justify-center rounded-2xl drop-shadow-2xl">
           {/* <p className="text-amber-500">Latest Sermon</p>
           <p className=" text-3xl text-white">Passage / Sermon Title</p>
           <p className="font-extralight">Jan 29 2023</p> */}
           <Link
-            className="py-1 px-3 rounded-lg bg-stone-800 text-xl 2xl:text-3xl text-white hover:text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:scale-110"
+            className="py-1 px-3 rounded-lg bg-stone-800 text-md md:text-xl 2xl:text-3xl text-white hover:text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:scale-110"
             href={props.siteSettings.youtubeLink}
           >
             <span className="ml-1 flex items-center justify-between">
@@ -61,7 +60,7 @@ const HoveringPlayer = (props: any) => {
             </span>
           </Link>
           <Link
-            className="py-1 px-3 rounded-lg bg-stone-800 text-xl 2xl:text-3xl text-white hover:text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:scale-110"
+            className="py-1 px-3 rounded-lg bg-stone-800 text-md md:text-xl 2xl:text-3xl text-white hover:text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:scale-110"
             href={props.siteSettings.podcastLink}
           >
             <span className="ml-1 flex items-center justify-between">
@@ -121,7 +120,7 @@ const BlockPlayer = (props: any) => {
 const Index = (props: any) => {
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-r  from-stone-900 to-stone-800 font-Raleway text-white/90">
-      <div className=" h-[200px] bg-[url('/assets/images/pulpit-short.jpeg')] bg-cover bg-center bg-no-repeat sm:h-[300px] md:h-[600px]">
+      <div className=" h-[350px] bg-[url('/assets/images/pulpit-short.jpeg')] bg-cover bg-center bg-no-repeat sm:h-[500px] md:h-[600px]">
         <div className="h-full bg-black/40">
           <Navbar logoUrl={urlFor(props.siteSettings.logo).width(600).url()} />
           <div className="relative mx-auto flex max-w-[1400px] flex-row">
@@ -132,7 +131,7 @@ const Index = (props: any) => {
           </div>
         </div>
       </div>
-      <BlockPlayer {...props} />
+      {/* <BlockPlayer {...props} /> */}
       <div className="items-left flex h-40 flex-col justify-center bg-gradient-to-r from-stone-400 to-stone-400/80 text-lg text-black md:text-2xl">
         <div className="justify-beginning mx-auto">
           <p className="font-medium">{props.siteSettings.serviceHeading}</p>
