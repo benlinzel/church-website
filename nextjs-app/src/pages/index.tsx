@@ -42,13 +42,13 @@ const UpcomingEvent = (props: UpcomingEventProps) => {
 const HoveringPlayer = (props: any) => {
   return (
     <div className="mx-auto hidden h-full p-8 md:block md:w-1/2">
-      <div className="h-[360px] rounded-2xl bg-[url('/assets/images/cross-hill-middle-east.png')] bg-cover bg-center bg-no-repeat drop-shadow-2xl">
-        <div className="group flex h-full flex-col justify-center rounded-2xl bg-black/50 p-4 hover:bg-black/20">
+      <div className="h-[360px] rounded-2xl drop-shadow-2xl">
+        <div className="group flex h-full flex-col justify-center rounded-2xl p-4">
           {/* <p className="text-amber-500">Latest Sermon</p>
           <p className=" text-3xl text-white">Passage / Sermon Title</p>
           <p className="font-extralight">Jan 29 2023</p> */}
           <Link
-            className="mx-auto rounded-lg border-amber-500 bg-stone-700 px-2 text-xl text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:border group-hover:-translate-y-1 group-hover:scale-110 group-hover:text-amber-500 group-hover:drop-shadow-2xl"
+            className="mx-auto rounded-lg border-amber-500 bg-stone-800 px-2 text-xl text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:border group-hover:-translate-y-1 group-hover:scale-110 group-hover:text-amber-500 group-hover:drop-shadow-2xl"
             href={props.siteSettings.youtubeLink}
           >
             <span className="ml-1 flex items-center justify-between">
@@ -61,7 +61,7 @@ const HoveringPlayer = (props: any) => {
             </span>
           </Link>
           <Link
-            className="mx-auto mt-2 rounded-lg border-amber-500 bg-stone-700 px-2 text-xl text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:border group-hover:translate-y-1 group-hover:scale-110 group-hover:text-amber-500 group-hover:drop-shadow-2xl"
+            className="mx-auto mt-2 rounded-lg border-amber-500 bg-stone-800 px-2 text-xl text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:border group-hover:translate-y-1 group-hover:scale-110 group-hover:text-amber-500 group-hover:drop-shadow-2xl"
             href={props.siteSettings.podcastLink}
           >
             <span className="ml-1 flex items-center justify-between">
@@ -122,7 +122,7 @@ const BlockPlayer = (props: any) => {
 const Index = (props: any) => {
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-r  from-stone-900 to-stone-800 font-Raleway text-white/90">
-      <div className=" h-[200px] bg-[url('/assets/images/hero-dark-short_smaller.jpeg')] bg-cover bg-center bg-no-repeat sm:h-[300px] md:h-[600px]">
+      <div className=" h-[200px] bg-[url('/assets/images/pulpit-short.jpeg')] bg-cover bg-center bg-no-repeat sm:h-[300px] md:h-[600px]">
         <div className="h-full bg-black/40">
           <Navbar logoUrl={urlFor(props.siteSettings.logo).width(600).url()} />
           <div className="relative mx-auto flex max-w-[1400px] flex-row">
