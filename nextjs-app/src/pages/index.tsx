@@ -47,7 +47,7 @@ const HoveringPlayer = (props: any) => {
           <p className=" text-3xl text-white">Passage / Sermon Title</p>
           <p className="font-extralight">Jan 29 2023</p> */}
           <Link
-            className="py-1 px-3 rounded-lg bg-stone-800 text-md md:text-xl 2xl:text-3xl text-white hover:text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:scale-110"
+            className="py-1 px-3 xl:px-5 xl:py-2 rounded-lg bg-stone-800 text-md md:text-xl xl:text-2xl xl:font-light text-white hover:text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:scale-110"
             href={props.siteSettings.youtubeLink}
           >
             <span className="ml-1 flex items-center justify-between">
@@ -60,7 +60,7 @@ const HoveringPlayer = (props: any) => {
             </span>
           </Link>
           <Link
-            className="py-1 px-3 rounded-lg bg-stone-800 text-md md:text-xl 2xl:text-3xl text-white hover:text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:scale-110"
+            className="py-1 px-3 xl:px-5 xl:py-2 rounded-lg bg-stone-800 text-md md:text-xl xl:text-2xl xl:font-light text-white hover:text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:scale-110"
             href={props.siteSettings.podcastLink}
           >
             <span className="ml-1 flex items-center justify-between">
