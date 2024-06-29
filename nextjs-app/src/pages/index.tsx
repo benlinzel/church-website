@@ -77,45 +77,45 @@ const HoveringPlayer = (props: any) => {
   );
 };
 
-const BlockPlayer = (props: any) => {
-  return (
-    <div className="h-40 bg-[url('/assets/images/cross-hill-middle-east.png')] bg-cover bg-center bg-no-repeat md:hidden md:h-96">
-      <div className="flex h-full flex-col justify-center bg-black/50 p-4 hover:bg-black/20">
-        <div className="md:pl-8">
-          {/* <p className="text-amber-500">Latest Sermon</p>
-          <p className="text-3xl text-white">Passage / Sermon Title</p>
-          <p className="font-extralight">Jan 29 2023</p> */}
-        </div>
-        <Link
-          className="mx-auto rounded-lg border-amber-500 bg-stone-700 px-2 text-xl text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:border hover:text-amber-500 hover:drop-shadow-2xl"
-          href={props.siteSettings.youtubeLink}
-        >
-          <span className="ml-1 flex items-center justify-between">
-            <span>Watch</span>
-            <img
-              src="/assets/icons/youtube.svg"
-              alt=""
-              className="ml-2 h-10 w-10"
-            />
-          </span>
-        </Link>
-        <Link
-          className="mx-auto mt-2 rounded-lg border-amber-500 bg-stone-700 px-2 text-xl text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:translate-y-1 hover:scale-110 hover:border hover:text-amber-500 hover:drop-shadow-2xl"
-          href={props.siteSettings.podcastLink}
-        >
-          <span className="ml-1 flex items-center justify-between">
-            <span>Listen</span>
-            <img
-              src="/assets/icons/headphones.svg"
-              alt=""
-              className="ml-1 h-10 w-10"
-            />
-          </span>
-        </Link>
-      </div>
-    </div>
-  );
-};
+// const BlockPlayer = (props: any) => {
+//   return (
+//     <div className="h-40 bg-[url('/assets/images/cross-hill-middle-east.png')] bg-cover bg-center bg-no-repeat md:hidden md:h-96">
+//       <div className="flex h-full flex-col justify-center bg-black/50 p-4 hover:bg-black/20">
+//         <div className="md:pl-8">
+//           {/* <p className="text-amber-500">Latest Sermon</p>
+//           <p className="text-3xl text-white">Passage / Sermon Title</p>
+//           <p className="font-extralight">Jan 29 2023</p> */}
+//         </div>
+//         <Link
+//           className="mx-auto rounded-lg border-amber-500 bg-stone-700 px-2 text-xl text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:border hover:text-amber-500 hover:drop-shadow-2xl"
+//           href={props.siteSettings.youtubeLink}
+//         >
+//           <span className="ml-1 flex items-center justify-between">
+//             <span>Watch</span>
+//             <img
+//               src="/assets/icons/youtube.svg"
+//               alt=""
+//               className="ml-2 h-10 w-10"
+//             />
+//           </span>
+//         </Link>
+//         <Link
+//           className="mx-auto mt-2 rounded-lg border-amber-500 bg-stone-700 px-2 text-xl text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:translate-y-1 hover:scale-110 hover:border hover:text-amber-500 hover:drop-shadow-2xl"
+//           href={props.siteSettings.podcastLink}
+//         >
+//           <span className="ml-1 flex items-center justify-between">
+//             <span>Listen</span>
+//             <img
+//               src="/assets/icons/headphones.svg"
+//               alt=""
+//               className="ml-1 h-10 w-10"
+//             />
+//           </span>
+//         </Link>
+//       </div>
+//     </div>
+//   );
+// };
 
 const Index = (props: any) => {
   return (
