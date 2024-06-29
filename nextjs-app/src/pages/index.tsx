@@ -42,13 +42,13 @@ const UpcomingEvent = (props: UpcomingEventProps) => {
 const HoveringPlayer = (props: any) => {
   return (
     <div className="mx-auto hidden h-full p-8 md:block md:w-1/2">
-      <div className="h-[360px] rounded-2xl drop-shadow-2xl">
-        <div className="group flex h-full flex-col justify-center rounded-2xl p-4">
+      <div className="h-[420px] flex gap-x-8 2xl:gap-x-16 items-center justify-center rounded-2xl drop-shadow-2xl">
+
           {/* <p className="text-amber-500">Latest Sermon</p>
           <p className=" text-3xl text-white">Passage / Sermon Title</p>
           <p className="font-extralight">Jan 29 2023</p> */}
           <Link
-            className="mx-auto rounded-lg border-amber-500 bg-stone-800 px-2 text-xl text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:border group-hover:-translate-y-1 group-hover:scale-110 group-hover:text-amber-500 group-hover:drop-shadow-2xl"
+            className="py-1 px-3 rounded-lg bg-stone-800 text-xl 2xl:text-3xl text-white hover:text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:scale-110"
             href={props.siteSettings.youtubeLink}
           >
             <span className="ml-1 flex items-center justify-between">
@@ -61,7 +61,7 @@ const HoveringPlayer = (props: any) => {
             </span>
           </Link>
           <Link
-            className="mx-auto mt-2 rounded-lg border-amber-500 bg-stone-800 px-2 text-xl text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:border group-hover:translate-y-1 group-hover:scale-110 group-hover:text-amber-500 group-hover:drop-shadow-2xl"
+            className="py-1 px-3 rounded-lg bg-stone-800 text-xl 2xl:text-3xl text-white hover:text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:scale-110"
             href={props.siteSettings.podcastLink}
           >
             <span className="ml-1 flex items-center justify-between">
@@ -73,7 +73,6 @@ const HoveringPlayer = (props: any) => {
               />
             </span>
           </Link>
-        </div>
       </div>
     </div>
   );
