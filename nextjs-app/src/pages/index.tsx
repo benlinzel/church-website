@@ -42,7 +42,7 @@ const UpcomingEvent = (props: UpcomingEventProps) => {
 const HoveringPlayer = (props: any) => {
   return (
     <div className="mx-auto h-full p-8 w-1/2">
-      <div className="h-[300px] md:h-[420px] flex flex-col md:flex-row gap-y-4 gap-x-8 2xl:gap-x-16 items-center justify-center rounded-2xl drop-shadow-2xl">
+      <div className="h-[300px] md:h-[420px] xl:h-[650px] flex flex-col md:flex-row gap-y-4 gap-x-8 2xl:gap-x-16 items-center justify-center rounded-2xl drop-shadow-2xl">
           {/* <p className="text-amber-500">Latest Sermon</p>
           <p className=" text-3xl text-white">Passage / Sermon Title</p>
           <p className="font-extralight">Jan 29 2023</p> */}
@@ -120,7 +120,7 @@ const HoveringPlayer = (props: any) => {
 const Index = (props: any) => {
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-r  from-stone-900 to-stone-800 font-Raleway text-white/90">
-      <div className=" h-[350px] bg-[url('/assets/images/pulpit-short.webp')] bg-cover bg-center bg-no-repeat sm:h-[500px] md:h-[600px]">
+      <div className="h-[350px] sm:h-[450px] md:h-[600px] xl:h-[800px] bg-[url('/assets/images/pulpit-short.webp')] bg-cover bg-center bg-no-repeat">
         <div className="h-full bg-black/40">
           <Navbar logoUrl={urlFor(props.siteSettings.logo).width(600).url()} />
           <div className="relative mx-auto flex max-w-[1400px] flex-row">
