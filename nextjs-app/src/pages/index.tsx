@@ -120,7 +120,7 @@ const HoveringPlayer = (props: any) => {
 const Index = (props: any) => {
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-r  from-stone-900 to-stone-800 font-Raleway text-white/90">
-      <div className=" h-[350px] bg-[url('/assets/images/pulpit-short.jpeg')] bg-cover bg-center bg-no-repeat sm:h-[500px] md:h-[600px]">
+      <div className=" h-[350px] bg-[url('/assets/images/pulpit-short.webp')] bg-cover bg-center bg-no-repeat sm:h-[500px] md:h-[600px]">
         <div className="h-full bg-black/40">
           <Navbar logoUrl={urlFor(props.siteSettings.logo).width(600).url()} />
           <div className="relative mx-auto flex max-w-[1400px] flex-row">
