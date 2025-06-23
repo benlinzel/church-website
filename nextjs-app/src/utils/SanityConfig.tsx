@@ -1,25 +1,25 @@
 /* eslint-disable @next/next/no-img-element */
-import { createClient } from '@sanity/client';
-import imageUrlBuilder from '@sanity/image-url';
-import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import { createClient } from "@sanity/client";
+import imageUrlBuilder from "@sanity/image-url";
+import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 export const client = createClient({
-  projectId: '5vf3tw8e',
-  dataset: 'production',
-  apiVersion: '2023-01-30',
+  projectId: "5vf3tw8e",
+  dataset: "production",
+  apiVersion: "2023-01-30",
   useCdn: false,
 });
 
 export const imgBuilder = imageUrlBuilder(client);
 
 export function urlFor(source: SanityImageSource) {
-  return imgBuilder.image(source);
+  return imgBuilder.image(source).auto("format");
 }
 
 export const myPortableTextComponentsNoMargin = {
   types: {
     image: ({ value }: any) => {
-      return <img src={urlFor(value?.asset?._ref).url()} alt='image' />;
+      return <img src={urlFor(value?.asset?._ref).url()} alt="image" />;
     },
     code: (prop: any) => (
       <pre data-language={prop.node.language}>
@@ -53,7 +53,7 @@ export const myPortableTextComponentsNoMargin = {
 export const myPortableTextComponents = {
   types: {
     image: ({ value }: any) => {
-      return <img src={urlFor(value?.asset?._ref).url()} alt='image' />;
+      return <img src={urlFor(value?.asset?._ref).url()} alt="image" />;
     },
     code: (prop: any) => (
       <pre data-language={prop.node.language}>

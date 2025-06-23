@@ -1,9 +1,9 @@
-import { PortableText } from '@portabletext/react';
-import Image from 'next/image';
+import { PortableText } from "@portabletext/react";
+import Image from "next/image";
 
-import Footer from '@/components/footer';
-import Navbar from '@/components/navbar';
-import { client, myPortableTextComponents, urlFor } from '@/utils/SanityConfig';
+import Footer from "@/components/footer";
+import Navbar from "@/components/navbar";
+import { client, myPortableTextComponents, urlFor } from "@/utils/SanityConfig";
 
 const OurTeam = (props: any) => {
   return (
@@ -31,6 +31,7 @@ const OurTeam = (props: any) => {
                       className="mx-auto rounded-lg"
                       width={300}
                       height={300}
+                      unoptimized
                     ></Image>
                   ) : (
                     <div className="h-[200px]"></div>
@@ -41,7 +42,7 @@ const OurTeam = (props: any) => {
                   <p className="text-center text-base font-extralight text-white/60 sm:text-xl">
                     {teamMember.title}
                   </p>
-                  {process.env.NEXT_PUBLIC_SHOW_TEAM_BIOS === 'true' &&
+                  {process.env.NEXT_PUBLIC_SHOW_TEAM_BIOS === "true" &&
                     teamMember.bio && (
                       <PortableText
                         value={teamMember.bio}
