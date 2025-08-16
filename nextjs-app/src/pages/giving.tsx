@@ -1,6 +1,6 @@
-import Footer from '@/components/footer';
-import Navbar from '@/components/navbar';
-import { client, urlFor } from '@/utils/SanityConfig';
+import Footer from "@/components/footer";
+import Navbar from "@/components/navbar";
+import { client, urlFor } from "@/utils/SanityConfig";
 
 const Giving = (props: any) => {
   return (
@@ -32,7 +32,7 @@ const Giving = (props: any) => {
 export async function getStaticProps() {
   const siteSettings = await client
     .fetch(`*[_id == "siteSettings"]`)
-    .then((settings) => {
+    .then((settings: any[]) => {
       return settings[0];
     });
   return {

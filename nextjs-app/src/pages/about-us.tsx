@@ -57,7 +57,7 @@ const AboutUs = (props: any) => {
 export async function getStaticProps() {
   const siteSettings = await client
     .fetch(`*[_id == "siteSettings"]`)
-    .then((settings) => {
+    .then((settings: any[]) => {
       return settings[0];
     });
   const statements = await client.fetch(

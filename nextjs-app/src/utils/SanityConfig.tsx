@@ -1,5 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
-import { createClient } from "@sanity/client";
+import { createClient } from "next-sanity";
 import imageUrlBuilder from "@sanity/image-url";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
@@ -10,10 +9,10 @@ export const client = createClient({
   useCdn: false,
 });
 
-export const imgBuilder = imageUrlBuilder(client);
+const builder = imageUrlBuilder(client);
 
 export function urlFor(source: SanityImageSource) {
-  return imgBuilder.image(source).auto("format");
+  return builder.image(source).auto("format");
 }
 
 export const myPortableTextComponentsNoMargin = {

@@ -1,8 +1,8 @@
-import { PortableText } from '@portabletext/react';
+import { PortableText } from "@portabletext/react";
 
-import Footer from '@/components/footer';
-import Navbar from '@/components/navbar';
-import { client, myPortableTextComponents, urlFor } from '@/utils/SanityConfig';
+import Footer from "@/components/footer";
+import Navbar from "@/components/navbar";
+import { client, myPortableTextComponents, urlFor } from "@/utils/SanityConfig";
 
 const WhatWeBelieve = (props: any) => {
   return (
@@ -49,7 +49,7 @@ const WhatWeBelieve = (props: any) => {
 export async function getStaticProps() {
   const siteSettings = await client
     .fetch(`*[_id == "siteSettings"]`)
-    .then((settings) => {
+    .then((settings: any[]) => {
       return settings[0];
     });
   const faithArticles = await client.fetch(

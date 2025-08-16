@@ -63,7 +63,7 @@ const OurTeam = (props: any) => {
 export async function getStaticProps() {
   const siteSettings = await client
     .fetch(`*[_id == "siteSettings"]`)
-    .then((settings) => {
+    .then((settings: any[]) => {
       return settings[0];
     });
   const teamMembers = await client.fetch(

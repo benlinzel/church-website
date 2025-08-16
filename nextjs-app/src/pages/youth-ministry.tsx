@@ -1,8 +1,8 @@
-import { PortableText } from '@portabletext/react';
+import { PortableText } from "@portabletext/react";
 
-import Footer from '@/components/footer';
-import Navbar from '@/components/navbar';
-import { client, myPortableTextComponents, urlFor } from '@/utils/SanityConfig';
+import Footer from "@/components/footer";
+import Navbar from "@/components/navbar";
+import { client, myPortableTextComponents, urlFor } from "@/utils/SanityConfig";
 
 const YouthMinistry = (props: any) => {
   return (
@@ -32,12 +32,12 @@ const YouthMinistry = (props: any) => {
 export async function getStaticProps() {
   const siteSettings = await client
     .fetch(`*[_id == "siteSettings"]`)
-    .then((settings) => {
+    .then((settings: any[]) => {
       return settings[0];
     });
   const youthMinistry = await client
     .fetch(`*[_id == "youthMinistry"]`)
-    .then((youth) => {
+    .then((youth: any[]) => {
       return youth[0];
     });
   return {

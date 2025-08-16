@@ -43,35 +43,35 @@ const HoveringPlayer = (props: any) => {
   return (
     <div className="mx-auto h-full p-8 w-1/2">
       <div className="h-[300px] md:h-[420px] xl:h-[650px] flex flex-col md:flex-row gap-y-4 gap-x-8 2xl:gap-x-16 items-center justify-center rounded-2xl drop-shadow-2xl">
-          {/* <p className="text-amber-500">Latest Sermon</p>
+        {/* <p className="text-amber-500">Latest Sermon</p>
           <p className=" text-3xl text-white">Passage / Sermon Title</p>
           <p className="font-extralight">Jan 29 2023</p> */}
-          <Link
-            className="py-1 px-3 xl:px-5 xl:py-2 rounded-lg bg-stone-800 text-md md:text-xl xl:text-2xl xl:font-light text-white hover:text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:scale-110"
-            href={props.siteSettings.youtubeLink}
-          >
-            <span className="ml-1 flex items-center justify-between">
-              <span>Watch</span>
-              <img
-                src="/assets/icons/youtube.svg"
-                alt=""
-                className="ml-1 h-10 w-10"
-              />
-            </span>
-          </Link>
-          <Link
-            className="py-1 px-3 xl:px-5 xl:py-2 rounded-lg bg-stone-800 text-md md:text-xl xl:text-2xl xl:font-light text-white hover:text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:scale-110"
-            href={props.siteSettings.podcastLink}
-          >
-            <span className="ml-1 flex items-center justify-between">
-              <span>Listen</span>
-              <img
-                src="/assets/icons/headphones.svg"
-                alt=""
-                className="ml-1 h-10 w-10"
-              />
-            </span>
-          </Link>
+        <Link
+          className="py-1 px-3 xl:px-5 xl:py-2 rounded-lg bg-stone-800 text-md md:text-xl xl:text-2xl xl:font-light text-white hover:text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:scale-110"
+          href={props.siteSettings.youtubeLink}
+        >
+          <span className="ml-1 flex items-center justify-between">
+            <span>Watch</span>
+            <img
+              src="/assets/icons/youtube.svg"
+              alt=""
+              className="ml-1 h-10 w-10"
+            />
+          </span>
+        </Link>
+        <Link
+          className="py-1 px-3 xl:px-5 xl:py-2 rounded-lg bg-stone-800 text-md md:text-xl xl:text-2xl xl:font-light text-white hover:text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:scale-110"
+          href={props.siteSettings.podcastLink}
+        >
+          <span className="ml-1 flex items-center justify-between">
+            <span>Listen</span>
+            <img
+              src="/assets/icons/headphones.svg"
+              alt=""
+              className="ml-1 h-10 w-10"
+            />
+          </span>
+        </Link>
       </div>
     </div>
   );
@@ -185,7 +185,7 @@ export async function getStaticProps() {
 
   const siteSettings = await client
     .fetch(`*[_id == "siteSettings"]`)
-    .then((settings) => {
+    .then((settings: any[]) => {
       return settings[0];
     });
   const upcomingEvents = await client.fetch(
