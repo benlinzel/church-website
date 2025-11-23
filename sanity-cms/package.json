@@ -15,18 +15,18 @@
     "sanity"
   ],
   "dependencies": {
-    "@sanity/vision": "^4.4.1",
+    "@sanity/vision": "^4.18.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-is": "^18.3.1",
-    "sanity": "^4.4.1",
-    "styled-components": "^6.1.15"
+    "sanity": "^4.18.0",
+    "styled-components": "^6.1.19"
   },
   "devDependencies": {
-    "@sanity/eslint-config-studio": "^2.0.4",
-    "eslint": "^8.57.1",
+    "@sanity/eslint-config-studio": "^5.0.2",
+    "eslint": "^9.39.1",
     "prettier": "^2.8.8",
-    "typescript": "^5.0.0"
+    "typescript": "^5.9.3"
   },
   "prettier": {
     "semi": false,
@@ -36,7 +36,8 @@
   },
   "pnpm": {
     "overrides": {
-      "prismjs": "^1.30.0"
+      "prismjs": "^1.30.0",
+      "glob": ">=10.5.0"
     }
   }
 }
