@@ -1,14 +1,11 @@
-/* eslint-disable @next/next/no-img-element */
 import { PortableText } from "@portabletext/react";
+import Image from "next/image";
 import Link from "next/link";
 
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
-import {
-  client,
-  myPortableTextComponentsNoMargin,
-  urlFor,
-} from "@/utils/SanityConfig";
+import { myPortableTextComponentsNoMargin } from "@/utils/SanityConfig";
+import client, { urlFor } from "@/utils/sanity.client";
 
 interface UpcomingEventProps {
   title: string;
@@ -52,10 +49,13 @@ const HoveringPlayer = (props: any) => {
         >
           <span className="ml-1 flex items-center justify-between">
             <span>Watch</span>
-            <img
+            <Image
               src="/assets/icons/youtube.svg"
               alt=""
-              className="ml-1 h-10 w-10"
+              width={40}
+              height={40}
+              className="ml-1"
+              unoptimized
             />
           </span>
         </Link>
@@ -65,10 +65,13 @@ const HoveringPlayer = (props: any) => {
         >
           <span className="ml-1 flex items-center justify-between">
             <span>Listen</span>
-            <img
+            <Image
               src="/assets/icons/headphones.svg"
               alt=""
-              className="ml-1 h-10 w-10"
+              width={40}
+              height={40}
+              className="ml-1"
+              unoptimized
             />
           </span>
         </Link>
@@ -141,10 +144,13 @@ const Index = (props: any) => {
               <span className="text-base group-hover:underline group-hover:decoration-amber-500 md:text-2xl">
                 218 Glover Road, Stoney Creek, ON L8E 5H6
               </span>
-              <img
+              <Image
                 src="/assets/icons/navigation.svg"
                 alt=""
-                className="mx-1 h-5 w-5 transition ease-in-out group-hover:translate-x-1 group-hover:rotate-45 group-hover:scale-110"
+                width={20}
+                height={20}
+                className="mx-1 transition ease-in-out group-hover:translate-x-1 group-hover:rotate-45 group-hover:scale-110"
+                unoptimized
               />
             </span>
           </Link>

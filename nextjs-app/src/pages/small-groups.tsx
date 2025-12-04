@@ -1,6 +1,6 @@
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
-import { client, urlFor } from "@/utils/SanityConfig";
+import client, { urlFor } from "@/utils/sanity.client";
 
 const SmallGroups = (props: any) => {
   return (
