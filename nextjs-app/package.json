@@ -5,8 +5,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "export": "next export",
-    "build-prod": "run-s clean build export",
+    "build-prod": "next build",
     "lint": "next lint"
   },
   "dependencies": {
@@ -17,8 +16,8 @@
     "next-sanity": "^11.6.10",
     "next-seo": "^6.8.0",
     "next-sitemap": "^4.2.3",
-    "react": "19.1.1",
-    "react-dom": "19.1.1",
+    "react": "19.2.1",
+    "react-dom": "19.2.1",
     "sanity": "^4.20.2",
     "styled-components": "^6.1.19"
   },
