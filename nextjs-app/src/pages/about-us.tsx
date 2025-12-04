@@ -5,7 +5,8 @@ import Link from "next/link";
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
 import { AppConfig } from "@/utils/AppConfig";
-import { client, myPortableTextComponents, urlFor } from "@/utils/SanityConfig";
+import { myPortableTextComponents } from "@/utils/SanityConfig";
+import client, { urlFor } from "@/utils/sanity.client";
 
 const AboutUs = (props: any) => {
   return (

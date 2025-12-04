@@ -5,13 +5,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "build-prod": "next build",
-    "preview": "pnpm build && npx serve@latest out -p 3000",
-    "serve": "npx serve@latest out -p 3000",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prettify": "npx prettier . --write"
   },
   "dependencies": {
     "@portabletext/react": "^3.2.4",
+    "@sanity/client": "^7.13.1",
     "@sanity/image-url": "^1.2.0",
     "next": "15.4.8",
     "next-sanity": "^11.6.10",

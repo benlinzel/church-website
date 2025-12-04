@@ -1,24 +1,23 @@
-import { createClient } from "next-sanity";
-import imageUrlBuilder from "@sanity/image-url";
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import Image from "next/image";
+import client, { urlFor } from "./sanity.client";
 
-export const client = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
-  dataset: "production",
-  apiVersion: "2023-01-30",
-  useCdn: false,
-});
-
-const builder = imageUrlBuilder(client);
-
-export function urlFor(source: SanityImageSource) {
-  return builder.image(source).auto("format");
-}
+// Re-export for backward compatibility
+export { client, urlFor };
 
 export const myPortableTextComponentsNoMargin = {
   types: {
     image: ({ value }: any) => {
-      return <img src={urlFor(value?.asset?._ref).url()} alt="image" />;
+      return (
+        <div className="relative my-4 h-[400px] w-full">
+          <Image
+            src={urlFor(value?.asset?._ref).width(450).height(450).url()}
+            alt={"image"}
+            fill
+            className="object-cover rounded-lg"
+            unoptimized
+          />
+        </div>
+      );
     },
     code: (prop: any) => (
       <pre data-language={prop.node.language}>
@@ -52,7 +51,17 @@ export const myPortableTextComponentsNoMargin = {
 export const myPortableTextComponents = {
   types: {
     image: ({ value }: any) => {
-      return <img src={urlFor(value?.asset?._ref).url()} alt="image" />;
+      return (
+        <div className="relative my-4 h-[400px] w-full">
+          <Image
+            src={urlFor(value?.asset?._ref).width(1200).height(900).url()}
+            alt={"image"}
+            fill
+            className="object-cover rounded-lg"
+            unoptimized
+          />
+        </div>
+      );
     },
     code: (prop: any) => (
       <pre data-language={prop.node.language}>

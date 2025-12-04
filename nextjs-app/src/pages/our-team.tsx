@@ -3,7 +3,8 @@ import Image from "next/image";
 
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
-import { client, myPortableTextComponents, urlFor } from "@/utils/SanityConfig";
+import { myPortableTextComponents } from "@/utils/SanityConfig";
+import client, { urlFor } from "@/utils/sanity.client";
 
 const OurTeam = (props: any) => {
   return (
