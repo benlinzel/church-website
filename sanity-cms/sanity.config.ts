@@ -7,7 +7,7 @@ import {schemaTypes} from './schemas'
 const singletonActions = new Set(['publish', 'discardChanges', 'restore'])
 
 // Define the singleton document types
-const singletonTypes = new Set(['settings', 'youthMinistry', 'childrensMinistry'])
+const singletonTypes = new Set(['siteSettings', 'youthMinistry', 'childrensMinistry'])
 
 export default defineConfig({
   name: 'default',

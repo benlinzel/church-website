@@ -77,4 +77,7 @@ export default defineType({
       type: 'string',
     }),
   ],
+  preview: {
+    prepare: () => ({ title: 'Site Settings' }),
+  },
 })
