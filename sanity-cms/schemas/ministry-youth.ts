@@ -29,4 +29,7 @@ export default defineType({
       type: 'blockContent',
     }),
   ],
+  preview: {
+    prepare: () => ({ title: 'Youth Ministry' }),
+  },
 })

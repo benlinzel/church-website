@@ -1,0 +1,44 @@
+packages:
+  - 'nextjs-app'
+  - 'sanity-cms'
+
+# Block transitive deps from using exotic sources (git refs, tarball URLs).
+# Default in pnpm 11, but pinned explicitly. Closes the gap that
+# `minimumReleaseAge` leaves: a registry package could otherwise pull in
+# malicious code from a github: or https://...tgz reference at install time,
+# bypassing the release-age check entirely.
+blockExoticSubdeps: true
+
+# Wait 7 days after a release before allowing it to be installed.
+# Mitigates supply-chain attacks via fresh malicious publishes.
+minimumReleaseAge: 10080
+minimumReleaseAgeStrict: false
+minimumReleaseAgeExclude:
+  # These packages do not publish "time" metadata to npm, so the age check
+  # cannot be applied. Verify new versions of these packages manually.
+  - eslint
+  - react-is
+  - "@sanity/diff"
+  - "@sanity/util"
+  - "@sanity/types"
+  - "@sanity/schema"
+  - "@sanity/mutator"
+  - "@tanstack/react-table"
+
+# Force specific versions of transitive dependencies.
+# postcss/minimatch/glob/prismjs patch known CVEs; @types/react keeps React 19
+# types consistent across packages that pull in older type defs.
+overrides:
+  glob: '>=10.5.0'
+  postcss: '8.5.10'
+  minimatch: '9.0.7'
+  prismjs: '>=1.30.0'
+  '@types/react': '19.1.8'
+  '@types/react-dom': '19.1.6'
+
+# Allow these specific packages to run install scripts. Everything else is blocked.
+# pnpm 11 syntax — `onlyBuiltDependencies` (the v10 name) is NOT recognized here.
+allowBuilds:
+  esbuild: true
+  sharp: true
+  unrs-resolver: true
