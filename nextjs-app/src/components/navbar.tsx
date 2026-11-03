@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
 
 import { SITE_FONTS } from "@/utils/fonts";
+import { imageDimensions, urlFor } from "@/utils/sanity.client";
 
 // The library lives on a library. subdomain of whichever host serves the site.
 const libraryUrlForHost = () => {
@@ -120,20 +121,23 @@ const Dropdown = ({
   );
 };
 
-const Navbar = (props: any) => {
+const LOGO_WIDTH = 112; // its widest, on desktop
+
+const Navbar = ({ logo }: { logo?: { asset?: { _ref?: string } } }) => {
   const libraryUrl = useSyncExternalStore(subscribeNever, libraryUrlForHost, () => "#");
+  const size = imageDimensions(logo);
 
   return (
     <nav className={`${SITE_FONTS} relative z-20 mx-auto flex h-16 w-full max-w-[1200px] flex-row items-center justify-between p-4 sm:h-28`}>
-      {props.logoUrl && (
+      {logo && (
         <Link href="/">
           <Image
-            src={props.logoUrl}
+            src={urlFor(logo).url()}
             alt="Home"
             className="w-16 sm:w-28"
-            width={112}
-            height={112}
-            unoptimized
+            width={LOGO_WIDTH}
+            height={size ? Math.round((LOGO_WIDTH * size.height) / size.width) : LOGO_WIDTH}
+            priority
           />
         </Link>
       )}

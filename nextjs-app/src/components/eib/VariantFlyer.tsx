@@ -4,7 +4,6 @@ import { type ReactNode, type RefObject, useEffect, useRef } from "react";
 
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
-import { urlFor } from "@/utils/sanity.client";
 
 import { Camel, Candle, Donkey, Sheep } from "./art";
 import { EIB } from "./content";
@@ -56,13 +55,13 @@ const Walker = ({
   </div>
 );
 
-const Hero = ({ logoUrl }: { logoUrl?: string }) => {
+const Hero = ({ logo }: { logo?: { asset?: { _ref?: string } } }) => {
   const countdown = useCountdown();
   const message = countdownMessage(countdown);
 
   return (
     <section className={`${styles.texture} ${styles.red} relative overflow-hidden`}>
-      <Navbar logoUrl={logoUrl} />
+      <Navbar logo={logo} />
 
       {/* animals walk across the hero on a loop, independent of scroll */}
       <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-[70%] text-black opacity-[0.16]">
@@ -492,7 +491,7 @@ const Closing = () => (
 
 const VariantFlyer = ({ siteSettings }: EibVariantProps) => (
   <EibShell className="bg-[#4b5c43] text-[#efe8dc]">
-    <Hero logoUrl={siteSettings?.logo ? urlFor(siteSettings.logo).width(600).url() : undefined} />
+    <Hero logo={siteSettings?.logo} />
     <WhatToExpect />
     <Register />
     <AtAGlance />
