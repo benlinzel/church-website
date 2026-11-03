@@ -9,7 +9,7 @@ const SmallGroups = (props: any) => {
           .filter((smallGroup: any) => smallGroup.title)
           .map((smallGroup: any) => {
             return (
-              <section key={`${smallGroup.order}-${smallGroup.title}`} className="space-y-1 py-8 first:pt-0">
+              <section key={smallGroup._id} className="space-y-1 py-8 first:pt-0">
                 <h2 className="pb-1 font-display text-2xl font-semibold text-white sm:text-3xl">
                   {smallGroup.title}
                 </h2>

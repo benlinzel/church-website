@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import { AppConfig } from '@/utils/AppConfig';
 import { SITE_FONTS } from '@/utils/fonts';
 
@@ -24,20 +22,20 @@ const Footer = (props: any) => {
           <div>
             <FooterLabel>Contact</FooterLabel>
             <p>
-              <Link
+              <a
                 href={`tel:${props.siteSettings.footerContactPhone}`}
                 className="hover:text-amber-500 hover:underline"
               >
                 {formatPhoneNumber(props.siteSettings.footerContactPhone)}
-              </Link>
+              </a>
             </p>
             <p>
-              <Link
+              <a
                 href={`mailto:${props.siteSettings.footerContactEmail}`}
                 className="hover:text-amber-500 hover:underline"
               >
                 {props.siteSettings.footerContactEmail}
-              </Link>
+              </a>
             </p>
           </div>
           <div>
@@ -48,12 +46,12 @@ const Footer = (props: any) => {
           <div>
             <FooterLabel>Newsletter</FooterLabel>
             <p className="opacity-80">News and events from the church, by email.</p>
-            <Link
+            <a
               href={props.siteSettings.newsletterSignupFormLink}
               className="mt-3 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-semibold ring-1 ring-white/25 transition hover:text-amber-500 hover:ring-amber-500"
             >
               Sign up <span aria-hidden>→</span>
-            </Link>
+            </a>
           </div>
         </div>
         <p className="border-t border-white/10 py-6 text-xs opacity-60">

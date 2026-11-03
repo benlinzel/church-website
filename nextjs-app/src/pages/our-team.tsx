@@ -26,7 +26,7 @@ const OurTeam = (props: any) => {
           .map((teamMember: any) => {
             return (
               <article
-                key={teamMember.name}
+                key={teamMember._id}
                 className="grid grid-cols-[6rem_1fr] gap-x-5 gap-y-4 py-10 [grid-template-areas:'photo_name'_'bio_bio'] first:pt-0 sm:grid-cols-[13rem_1fr] sm:grid-rows-[auto_1fr] sm:gap-x-10 sm:[grid-template-areas:'photo_name'_'photo_bio']"
               >
                 <div className="[grid-area:photo]">
@@ -37,7 +37,7 @@ const OurTeam = (props: any) => {
                       className="aspect-square w-full rounded-lg object-cover"
                       width={300}
                       height={300}
-                      unoptimized
+                      sizes="(min-width: 640px) 13rem, 6rem"
                     />
                   ) : (
                     <div

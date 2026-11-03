@@ -1,5 +1,4 @@
 import { PortableText } from "@portabletext/react";
-import Link from "next/link";
 
 import PageLayout from "@/components/PageLayout";
 import { AppConfig } from "@/utils/AppConfig";
@@ -15,11 +14,11 @@ const AboutUs = (props: any) => {
           .filter((statement: any) => statement.title)
           .map((statement: any) => {
             return (
-              <section key={`${statement.order}-${statement.title}`} className="py-8">
+              <section key={statement._id} className="py-8">
                 <h2 className="font-display text-2xl font-medium">
-                  <Link href={statement.link} className="text-amber-500 hover:underline">
+                  <a href={statement.link} className="text-amber-500 hover:underline">
                     {statement.order}. {statement.title}
-                  </Link>
+                  </a>
                 </h2>
                 <PortableText value={statement.body} components={myPortableTextComponents} />
               </section>

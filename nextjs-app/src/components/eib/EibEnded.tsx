@@ -4,7 +4,6 @@ import Link from "next/link";
 
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
-import { urlFor } from "@/utils/sanity.client";
 
 import { Donkey, Sheep } from "./art";
 import { EIB } from "./content";
@@ -13,7 +12,7 @@ import { EibShell, type EibVariantProps, styles } from "./shared";
 const EibEnded = ({ siteSettings }: Pick<EibVariantProps, "siteSettings">) => (
   <EibShell className="bg-[#4b5c43] text-[#efe8dc]">
     <section className={`${styles.texture} ${styles.red} relative overflow-hidden`}>
-      <Navbar logoUrl={siteSettings?.logo ? urlFor(siteSettings.logo).width(600).url() : undefined} />
+      <Navbar logo={siteSettings?.logo} />
 
       <div aria-hidden className="pointer-events-none absolute bottom-0 right-[-2%] flex items-end gap-2 text-black opacity-[0.16]">
         <Sheep className="w-20 -scale-x-100 md:w-32" />

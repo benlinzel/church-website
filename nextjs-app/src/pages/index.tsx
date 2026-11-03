@@ -1,6 +1,6 @@
 import { PortableText } from "@portabletext/react";
 import Image from "next/image";
-import Link from "next/link";
+import { type ReactNode, useSyncExternalStore } from "react";
 
 import HomeBanner from "@/components/eib/HomeBanner";
 import { isEibOver } from "@/components/eib/timing";
@@ -8,15 +8,33 @@ import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
 import { AppConfig } from "@/utils/AppConfig";
 import { myPortableTextComponentsNoMargin } from "@/utils/SanityConfig";
-import client, { fetchSiteSettings, urlFor } from "@/utils/sanity.client";
+import client, { fetchSiteSettings } from "@/utils/sanity.client";
 
 interface UpcomingEventProps {
+  _id: string;
   title: string;
-  date: Date;
+  date: string; // YYYY-MM-DD
   description: any;
 }
 
-const UpcomingEvent = (props: UpcomingEventProps) => {
+const EVENTS_LIMIT = Number(process.env.NEXT_PUBLIC_UPCOMING_EVENTS_LIMIT) || undefined;
+
+const subscribeNever = () => () => {};
+
+// The page is built ahead of time, so events that have passed since the last
+// build are dropped again in the browser. The first render uses the build's
+// list so it matches the HTML.
+const useUpcoming = (events: UpcomingEventProps[]) => {
+  const today = useSyncExternalStore(
+    subscribeNever,
+    () => new Date().toLocaleDateString("en-CA"), // local YYYY-MM-DD
+    () => null
+  );
+  const upcoming = today ? events.filter((event) => event.date >= today) : events;
+  return upcoming.slice(0, EVENTS_LIMIT);
+};
+
+const UpcomingEvent = (props: Omit<UpcomingEventProps, "_id">) => {
   return (
     <div className="rounded-xl bg-white/5 p-6 text-center ring-1 ring-white/10">
       <h3 className="font-display text-xl font-semibold text-white">{props.title}</h3>
@@ -34,35 +52,89 @@ const UpcomingEvent = (props: UpcomingEventProps) => {
   );
 };
 
-const MediaLink = ({ href, icon, label }: { href: string; icon: string; label: string }) => (
-  <Link
-    href={href}
-    className="inline-flex items-center gap-3 rounded-full bg-stone-900/80 px-6 py-3 text-lg font-medium text-white shadow-xl ring-1 ring-white/15 backdrop-blur transition hover:-translate-y-0.5 hover:text-amber-500 hover:ring-amber-500/60 md:text-xl"
-  >
-    {label}
-    <Image src={icon} alt="" width={32} height={32} className="h-7 w-7 md:h-8 md:w-8" unoptimized />
-  </Link>
+const PlayIcon = () => (
+  <svg viewBox="0 0 24 24" aria-hidden className="h-5 w-5 md:h-6 md:w-6" fill="currentColor">
+    <path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z" />
+  </svg>
 );
+
+const HeadphonesIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    aria-hidden
+    className="h-5 w-5 md:h-6 md:w-6"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+  >
+    <path d="M4 15v-3a8 8 0 0 1 16 0v3" />
+    <rect x="3" y="14" width="4.5" height="6.5" rx="1.5" fill="currentColor" />
+    <rect x="16.5" y="14" width="4.5" height="6.5" rx="1.5" fill="currentColor" />
+  </svg>
+);
+
+// Watch is the main action (solid amber); Listen sits beside it in glass
+const MediaLink = ({
+  href,
+  icon,
+  label,
+  primary = false,
+}: {
+  href: string;
+  icon: ReactNode;
+  label: string;
+  primary?: boolean;
+}) => (
+  <a
+    href={href}
+    className={`inline-flex items-center gap-2.5 rounded-full px-6 py-3 text-lg font-semibold shadow-xl transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400 motion-reduce:transition-none md:px-7 md:text-xl ${
+      primary
+        ? "bg-amber-500 text-stone-950 hover:bg-amber-400"
+        : "bg-white/10 text-white ring-1 ring-inset ring-white/35 backdrop-blur-md hover:bg-white/15 hover:ring-amber-400"
+    }`}
+  >
+    {icon}
+    {label}
+  </a>
+);
+
+// widths made by scripts/hero-images.mjs
+const HERO_WIDTHS = [640, 960, 1280, 1920, 2560];
+const heroSrcSet = (format: "avif" | "webp") =>
+  HERO_WIDTHS.map((width) => `/assets/images/hero/pulpit-${width}.${format} ${width}w`).join(", ");
 
 const Index = (props: any) => {
   const { siteSettings } = props;
+  const upcomingEvents = useUpcoming(props.upcomingEvents);
 
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-r from-stone-900 to-stone-800 text-white/90">
-      <section className="bg-[url('/assets/images/pulpit-short.webp')] bg-cover bg-center bg-no-repeat">
-        <div className="flex min-h-[75svh] flex-col bg-gradient-to-b from-black/50 via-black/40 to-black/60 sm:min-h-[560px] md:min-h-[680px] xl:min-h-[800px]">
-          <Navbar logoUrl={urlFor(siteSettings.logo).width(600).url()} />
-          <div className="mx-auto flex w-full max-w-[1200px] grow flex-col items-center justify-center px-6 pb-16 text-center">
-            <h1 className="max-w-3xl font-display text-4xl font-bold text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)] sm:text-5xl md:text-6xl">
+      <section className="relative isolate">
+        <picture>
+          <source type="image/avif" srcSet={heroSrcSet("avif")} sizes="100vw" />
+          {/* next/image can't resize local files in a static export, so the
+              sizes are made ahead of time by scripts/hero-images.mjs */}
+          <img
+            src="/assets/images/hero/pulpit-1280.webp"
+            srcSet={heroSrcSet("webp")}
+            sizes="100vw"
+            alt=""
+            fetchPriority="high"
+            className="absolute inset-0 -z-10 h-full w-full object-cover"
+          />
+        </picture>
+        {/* dark at the top for the nav and at the bottom for the heading,
+            lighter in between so the spotlit pulpit shows */}
+        <div className="flex min-h-[75svh] flex-col bg-gradient-to-b from-black/60 via-black/20 to-black/85 sm:min-h-[560px] md:min-h-[680px] xl:min-h-[800px]">
+          <Navbar logo={siteSettings.logo} />
+          <div className="mx-auto flex w-full max-w-[1200px] grow flex-col items-center justify-end px-6 pb-14 text-center md:pb-20">
+            <h1 className="max-w-4xl text-balance font-display text-4xl font-bold text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)] sm:text-5xl md:text-6xl">
               {siteSettings.heading ?? `Welcome to ${AppConfig.title}`}
             </h1>
             <div className="mt-8 flex flex-wrap justify-center gap-4 md:mt-10">
-              <MediaLink href={siteSettings.youtubeLink} icon="/assets/icons/youtube.svg" label="Watch" />
-              <MediaLink
-                href={siteSettings.podcastLink}
-                icon="/assets/icons/headphones.svg"
-                label="Listen"
-              />
+              <MediaLink href={siteSettings.youtubeLink} icon={<PlayIcon />} label="Watch" primary />
+              <MediaLink href={siteSettings.podcastLink} icon={<HeadphonesIcon />} label="Listen" />
             </div>
           </div>
         </div>
@@ -82,7 +154,7 @@ const Index = (props: any) => {
               {siteSettings.serviceTime}
             </p>
           </div>
-          <Link
+          <a
             href={siteSettings.addressLink}
             className="group text-stone-700 hover:text-stone-900 md:text-lg"
           >
@@ -103,29 +175,25 @@ const Index = (props: any) => {
                 unoptimized
               />
             </span>
-          </Link>
+          </a>
         </div>
       </section>
 
       <main className="grow">
-        {props.upcomingEvents.length > 0 && (
+        {upcomingEvents.length > 0 && (
           <section className="mx-auto max-w-[1000px] px-6 py-16">
             <h2 className="text-center font-display text-3xl font-semibold text-white">
               Upcoming Events
             </h2>
             <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {props.upcomingEvents
-                .slice(0, process.env.NEXT_PUBLIC_UPCOMING_EVENTS_LIMIT)
-                .map((upcomingEvent: UpcomingEventProps) => {
-                  return (
-                    <UpcomingEvent
-                      key={upcomingEvent.title + upcomingEvent.date}
-                      title={upcomingEvent.title}
-                      date={upcomingEvent.date}
-                      description={upcomingEvent.description}
-                    />
-                  );
-                })}
+              {upcomingEvents.map((upcomingEvent) => (
+                <UpcomingEvent
+                  key={upcomingEvent._id}
+                  title={upcomingEvent.title}
+                  date={upcomingEvent.date}
+                  description={upcomingEvent.description}
+                />
+              ))}
             </div>
           </section>
         )}
@@ -136,12 +204,14 @@ const Index = (props: any) => {
 };
 
 export async function getStaticProps() {
-  const today = new Date();
-  const todayFormatted = today.toISOString().split("T")[0];
+  const today = new Date().toISOString().split("T")[0];
 
   const siteSettings = await fetchSiteSettings();
+  // every future event, not just the first few: the browser drops ones that
+  // pass before the next build, and later ones move up to fill the space
   const upcomingEvents = await client.fetch(
-    `*[_type == "upcomingEvent" && date >= '${todayFormatted}'] | order(date asc)`
+    `*[_type == "upcomingEvent" && date >= $today] | order(date asc)`,
+    { today }
   );
   return {
     props: {

@@ -16,6 +16,12 @@ export function urlFor(source: SanityImageSource) {
   return builder.image(source).auto("format");
 }
 
+// Sanity puts an image's size in its asset id (image-<hash>-800x600-png).
+export function imageDimensions(image: { asset?: { _ref?: string } } | undefined) {
+  const match = image?.asset?._ref?.match(/-(\d+)x(\d+)-[a-z]+$/);
+  return match ? { width: Number(match[1]), height: Number(match[2]) } : undefined;
+}
+
 export default client;
 
 // The singleton siteSettings document (logo, service times, footer details).
