@@ -38,8 +38,7 @@ export const EIB = {
   freeNote: "This is a free outdoor & indoor event",
   highlights: [
     { big: "5", label: "Scenes along the journey" },
-    { big: "Live", label: "Animals" },
-    { big: "Live", label: "Music" },
+    { big: "Live", label: "Music & animals" },
     { big: "Free", label: "Outdoor & indoor event" },
   ],
 

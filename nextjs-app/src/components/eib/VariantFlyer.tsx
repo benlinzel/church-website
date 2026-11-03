@@ -175,8 +175,9 @@ const WhatToExpect = () => {
           </h2>
         </div>
         <ul className="grid grid-cols-2 gap-4">
+          {/* three tiles: the first spans the top row */}
           {EIB.highlights.map((h, i) => (
-            <li key={h.label}>
+            <li key={h.label} className="first:col-span-2">
               <Reveal delay={i * 120} from="zoom" className="h-full">
                 <div className="flex h-full min-h-[150px] flex-col justify-between border-2 border-[#efe8dc]/35 p-5 transition duration-500 hover:-translate-y-1 hover:border-[#efe8dc]/70 md:min-h-[190px] md:p-6">
                   <p className="font-eibDisplay text-5xl font-extrabold uppercase leading-none tracking-[-0.04em] md:text-6xl">
