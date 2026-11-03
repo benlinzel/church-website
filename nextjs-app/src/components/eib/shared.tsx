@@ -1,5 +1,6 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
-import { NextSeo } from "next-seo";
+import { generateNextSeo } from "next-seo/pages";
 import {
   type CSSProperties,
   type ReactNode,
@@ -316,33 +317,35 @@ export const EibShell = ({
 
   return (
     <div className={`${eibFontVars} overflow-x-clip font-eibBody ${className}`}>
-      <NextSeo
-        title={`${EIB.title} | ${EIB.dateShort}`}
-        description={description}
-        // The design uses fixed light and dark colours. Stop browsers that
-        // force a dark theme (Brave Night Mode, Chrome/Samsung "darken
-        // websites", Dark Reader) from repainting the cream sections.
-        additionalMetaTags={[
-          { name: "color-scheme", content: "only light" },
-          { name: "darkreader-lock", content: "" },
-        ]}
-        // url overrides the homepage og:url set by DefaultSeo, otherwise
-        // Facebook treats a shared /eib link as the homepage.
-        openGraph={{
-          url: `${siteUrl}${pathname}`,
-          title: EIB.title,
+      <Head>
+        {generateNextSeo({
+          title: `${EIB.title} | ${EIB.dateShort}`,
           description,
-          images: [
-            {
-              url: `${siteUrl}${EIB.images.share}`,
-              width: 1200,
-              height: 630,
-              alt: `${EIB.title}, ${EIB.dateLong}, ${EIB.time} at ${EIB.venue}`,
-            },
+          // The design uses fixed light and dark colours. Stop browsers that
+          // force a dark theme (Brave Night Mode, Chrome/Samsung "darken
+          // websites", Dark Reader) from repainting the cream sections.
+          additionalMetaTags: [
+            { name: "color-scheme", content: "only light" },
+            { name: "darkreader-lock", content: "" },
           ],
-        }}
-        twitter={{ cardType: "summary_large_image" }}
-      />
+          // url overrides the homepage og:url set in _app, otherwise
+          // Facebook treats a shared /eib link as the homepage.
+          openGraph: {
+            url: `${siteUrl}${pathname}`,
+            title: EIB.title,
+            description,
+            images: [
+              {
+                url: `${siteUrl}${EIB.images.share}`,
+                width: 1200,
+                height: 630,
+                alt: `${EIB.title}, ${EIB.dateLong}, ${EIB.time} at ${EIB.venue}`,
+              },
+            ],
+          },
+          twitter: { cardType: "summary_large_image" },
+        })}
+      </Head>
       <noscript>
         <style>{`.${styles.reveal},.${styles.letter}{opacity:1!important;transform:none!important}`}</style>
       </noscript>
