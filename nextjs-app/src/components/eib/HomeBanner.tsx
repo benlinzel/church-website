@@ -20,6 +20,8 @@ const HomeBanner = () => {
   return (
     <section
       aria-label={EIB.title}
+      // opt this block out of browser-forced dark themes (see EibShell)
+      style={{ colorScheme: "only light" }}
       className={`${eibDisplayFont.variable} ${styles.texture} ${styles.red} relative overflow-hidden text-[#efe8dc]`}
     >
       <div aria-hidden className="pointer-events-none absolute bottom-0 right-[-2%] flex items-end gap-2 text-black opacity-[0.16]">

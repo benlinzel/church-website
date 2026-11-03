@@ -331,6 +331,13 @@ export const EibShell = ({
         description={description}
         noindex={noindex}
         nofollow={noindex}
+        // The design uses fixed light and dark colours. Stop browsers that
+        // force a dark theme (Brave Night Mode, Chrome/Samsung "darken
+        // websites", Dark Reader) from repainting the cream sections.
+        additionalMetaTags={[
+          { name: "color-scheme", content: "only light" },
+          { name: "darkreader-lock", content: "" },
+        ]}
         // url overrides the homepage og:url set by DefaultSeo, otherwise
         // Facebook treats a shared /eib link as the homepage.
         openGraph={{
