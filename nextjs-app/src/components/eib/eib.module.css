@@ -82,8 +82,19 @@
   will-change: transform;
 }
 
-.parallaxX {
-  transform: translate3d(calc(var(--sy, 0) * var(--speed, 0.2) * 1px), 0, 0);
+/* ---------- Hero animals walking across (see Walker) ---------- */
+
+@keyframes drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(100%, 0, 0);
+  }
+}
+
+.drift {
+  animation: drift var(--dur, 60s) linear calc(var(--at, 0) * var(--dur, 60s) * -1) infinite var(--dir, normal);
   will-change: transform;
 }
 
@@ -232,9 +243,12 @@
     transform: none;
     transition: none;
   }
-  .parallaxY,
-  .parallaxX {
+  .parallaxY {
     transform: none;
+  }
+  /* freeze each animal at its starting spot in the loop */
+  .drift {
+    animation-play-state: paused;
   }
   .twinkle,
   .flame,

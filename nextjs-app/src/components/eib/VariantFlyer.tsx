@@ -1,6 +1,6 @@
 // Variant 1: the printed flyer brought to life. Same suede red/green palette
-// and layout, with parallax animal silhouettes and scroll-linked headings.
-import { type RefObject, useEffect, useRef } from "react";
+// and layout, with walking animal silhouettes and scroll-linked headings.
+import { type ReactNode, type RefObject, useEffect, useRef } from "react";
 
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
@@ -31,6 +31,31 @@ const GLANCE_CARD_STYLES = [
   "bg-[#3f4f30] text-[#f1ece2]",
 ];
 
+// One animal crossing the hero. The track slides one container width and the
+// animal slides one of its own widths, so it enters fully off the left edge and
+// leaves fully off the right. `at` (0..1) is where in the loop it starts, which
+// is also where it rests under reduced motion.
+const Walker = ({
+  dur,
+  at,
+  reverse = false,
+  className,
+  children,
+}: {
+  dur: string;
+  at: number;
+  reverse?: boolean;
+  className: string;
+  children: ReactNode;
+}) => (
+  <div
+    className={`${styles.drift} absolute inset-0`}
+    style={cssVars({ "--dur": dur, "--at": at, "--dir": reverse ? "reverse" : "normal" })}
+  >
+    <div className={`${styles.drift} absolute right-full ${className}`}>{children}</div>
+  </div>
+);
+
 const Hero = ({ logoUrl }: { logoUrl?: string }) => {
   const countdown = useCountdown();
   const message = countdownMessage(countdown);
@@ -39,32 +64,20 @@ const Hero = ({ logoUrl }: { logoUrl?: string }) => {
     <section className={`${styles.texture} ${styles.red} relative overflow-hidden`}>
       <Navbar logoUrl={logoUrl} />
 
-      {/* animals drift sideways at different speeds as you scroll */}
+      {/* animals walk across the hero on a loop, independent of scroll */}
       <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-[70%] text-black opacity-[0.16]">
-        <div
-          className={`${styles.parallaxX} absolute bottom-[5.5rem] left-[-1%] w-[8%] min-w-[56px] max-w-[100px]`}
-          style={cssVars({ "--speed": 0.08 })}
-        >
+        <Walker dur="60s" at={0.065} className="bottom-[5.5rem] w-[8%] min-w-[56px] max-w-[100px]">
           <Sheep />
-        </div>
-        <div
-          className={`${styles.parallaxX} absolute bottom-[5.5rem] left-[6%] w-[30%] min-w-[180px] max-w-[340px]`}
-          style={cssVars({ "--speed": 0.22 })}
-        >
+        </Walker>
+        <Walker dur="60s" at={0.28} className="bottom-[5.5rem] w-[30%] min-w-[180px] max-w-[340px]">
           <Donkey className="-scale-x-100" />
-        </div>
-        <div
-          className={`${styles.parallaxX} absolute bottom-[5.5rem] left-[33%] w-[15%] min-w-[90px] max-w-[170px]`}
-          style={cssVars({ "--speed": 0.4 })}
-        >
+        </Walker>
+        <Walker dur="60s" at={0.42} className="bottom-[5.5rem] w-[15%] min-w-[90px] max-w-[170px]">
           <Sheep />
-        </div>
-        <div
-          className={`${styles.parallaxX} absolute bottom-28 right-[-4%] w-[26%] min-w-[160px] max-w-[300px] opacity-70`}
-          style={cssVars({ "--speed": -0.12 })}
-        >
+        </Walker>
+        <Walker dur="80s" at={0.175} reverse className="bottom-28 w-[26%] min-w-[160px] max-w-[300px] opacity-70">
           <Donkey />
-        </div>
+        </Walker>
       </div>
 
       <div className="relative mx-auto max-w-[1200px] px-6 pb-36 pt-6 md:pb-48 md:pt-10">
