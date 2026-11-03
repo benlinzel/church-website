@@ -4,13 +4,17 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import { generateDefaultSeo } from "next-seo/pages";
 
-import { AppConfig } from "@/utils/AppConfig";
+import { AppConfig, NO_INDEX } from "@/utils/AppConfig";
 import { SITE_FONTS, siteFontVars } from "@/utils/fonts";
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
   <>
     <Head>
       {generateDefaultSeo({
+        ...NO_INDEX,
+        // the default only honours these, not noindex/nofollow
+        dangerouslySetAllPagesToNoIndex: true,
+        dangerouslySetAllPagesToNoFollow: true,
         openGraph: {
           type: "website",
           locale: "en_CA",

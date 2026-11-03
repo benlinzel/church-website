@@ -111,6 +111,14 @@ SANITY_AUTH_TOKEN=... npx sanity@4 dataset import \
 
 The `dataset import` CLI requires being run from inside the Sanity project directory, same as export.
 
+## Search engines and AI (deliberately opted out)
+
+The church doesn't want the site in search results or used by AI tools, so it's set up for "reverse SEO". Don't add sitemaps, structured data or anything that raises its profile.
+
+- Every page sends `noindex, nofollow, noarchive, nosnippet, noimageindex`. In code that's `NO_INDEX` in `nextjs-app/src/utils/AppConfig.ts`, spread into every `generateDefaultSeo` / `generateNextSeo` call: a page-level call replaces the default robots tag. `public/_headers` sends the same as an `X-Robots-Tag` header for every file.
+- `public/robots.txt` blocks AI crawlers and everything else, but lets the big search engines fetch pages (so they can read the noindex and drop the site) and link-preview bots (so shared links still get a card).
+- Cloudflare's dashboard setting for blocking AI bots handles bots that ignore robots.txt.
+
 ## Deployment
 
 - **Site:** Next.js static export (`next build --webpack` → `nextjs-app/out/`) deployed to Cloudflare Pages. The site builds with webpack rather than Next 16's default Turbopack because Turbopack bundles all CSS into one file for the pages router, which makes every page preload every font (including the Evening in Bethlehem fonts on pages that never use them).

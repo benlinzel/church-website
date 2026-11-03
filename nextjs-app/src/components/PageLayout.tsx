@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
-import { AppConfig } from "@/utils/AppConfig";
+import { AppConfig, NO_INDEX } from "@/utils/AppConfig";
 import { urlFor } from "@/utils/sanity.client";
 
 // Shared frame for the inner pages: navbar, page title, a centred content
@@ -25,6 +25,7 @@ const PageLayout = ({
     <div className="flex min-h-screen flex-col bg-gradient-to-r from-stone-900 to-stone-800 text-white/90">
       <Head>
         {generateNextSeo({
+          ...NO_INDEX,
           title: `${title} | ${AppConfig.title}`,
           openGraph: {
             title,

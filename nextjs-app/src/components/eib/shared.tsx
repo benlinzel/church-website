@@ -10,6 +10,7 @@ import {
   useState,
 } from "react";
 
+import { NO_INDEX } from "@/utils/AppConfig";
 import { fetchSiteSettings } from "@/utils/sanity.client";
 
 import { EIB } from "./content";
@@ -315,6 +316,7 @@ export const EibShell = ({
     <div className={`${EIB_FONTS} overflow-x-clip ${className}`}>
       <Head>
         {generateNextSeo({
+          ...NO_INDEX,
           title: `${EIB.title} | ${EIB.dateShort}`,
           description,
           // The design uses fixed light and dark colours. Stop browsers that

@@ -1,0 +1,52 @@
+# Winona Gospel Church asks not to be indexed or used by AI tools.
+
+# Search engines may fetch pages only to read the "noindex" tag on every page,
+# so they drop the site from results. (Blocking them here would stop them
+# seeing that tag, and they could keep listing the URLs.)
+User-agent: Googlebot
+User-agent: Bingbot
+User-agent: DuckDuckBot
+User-agent: Slurp
+User-agent: YandexBot
+Allow: /
+
+# Link previews, so shared links still show a card in chats and social posts.
+User-agent: facebookexternalhit
+User-agent: Facebot
+User-agent: Twitterbot
+User-agent: WhatsApp
+User-agent: Slackbot-LinkExpanding
+User-agent: LinkedInBot
+User-agent: TelegramBot
+User-agent: Discordbot
+Allow: /
+
+# AI crawlers and assistants, named for the ones that only honour their own name.
+User-agent: GPTBot
+User-agent: ChatGPT-User
+User-agent: OAI-SearchBot
+User-agent: ClaudeBot
+User-agent: Claude-User
+User-agent: Claude-SearchBot
+User-agent: anthropic-ai
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: CCBot
+User-agent: Bytespider
+User-agent: meta-externalagent
+User-agent: Meta-ExternalFetcher
+User-agent: Amazonbot
+User-agent: cohere-ai
+User-agent: cohere-training-data-crawler
+User-agent: Diffbot
+User-agent: YouBot
+User-agent: Timpibot
+User-agent: ImagesiftBot
+User-agent: omgili
+Disallow: /
+
+# Everyone else.
+User-agent: *
+Disallow: /
