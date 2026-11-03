@@ -32,8 +32,8 @@ overrides:
   glob: '>=10.5.0'
   minimatch: '9.0.7'
   prismjs: '>=1.30.0'
-  '@types/react': '19.1.8'
-  '@types/react-dom': '19.1.6'
+  '@types/react': '19.3.0'
+  '@types/react-dom': '19.3.0'
 
   # --- Security pins (critical/high advisories, audited 2026-08-23) ---
   # Exact pins, not ranges, so resolution stays deterministic. Every version
@@ -47,13 +47,24 @@ overrides:
   linkify-it: '5.0.2'
   'nanoid@3': '3.3.18'
   'nanoid@5': '5.1.16'
-  postcss: '8.5.26'
+  postcss: '8.5.32'
   sharp: '0.35.3'
   tar: '7.5.22'
   undici: '6.28.0'
   vite: '7.3.6'
   'ws@7': '7.5.13'
   'ws@8': '8.21.3'
+
+# next's .d.ts files import React's types, but next doesn't declare
+# @types/react as a peer, so under pnpm's strict layout TypeScript can't find
+# them from inside next and its components (Head, NextScript...) type as broken.
+packageExtensions:
+  next:
+    peerDependencies:
+      '@types/react': '*'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
 
 # Allow these specific packages to run install scripts. Everything else is blocked.
 # pnpm 11 syntax — `onlyBuiltDependencies` (the v10 name) is NOT recognized here.

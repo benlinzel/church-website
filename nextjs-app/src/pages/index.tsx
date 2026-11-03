@@ -2,10 +2,13 @@ import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import Link from "next/link";
 
+import HomeBanner from "@/components/eib/HomeBanner";
+import { isEibOver } from "@/components/eib/timing";
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
+import { AppConfig } from "@/utils/AppConfig";
 import { myPortableTextComponentsNoMargin } from "@/utils/SanityConfig";
-import client, { urlFor } from "@/utils/sanity.client";
+import client, { fetchSiteSettings, urlFor } from "@/utils/sanity.client";
 
 interface UpcomingEventProps {
   title: string;
@@ -15,9 +18,9 @@ interface UpcomingEventProps {
 
 const UpcomingEvent = (props: UpcomingEventProps) => {
   return (
-    <div className="mx-auto w-[80%] px-4 pt-4 text-center sm:w-[90%]">
-      <p className="text-xl font-medium">{props.title}</p>
-      <p className="pb-2 font-extralight text-amber-500">
+    <div className="rounded-xl bg-white/5 p-6 text-center ring-1 ring-white/10">
+      <h3 className="font-display text-xl font-semibold text-white">{props.title}</h3>
+      <p className="mt-1 pb-3 text-amber-500">
         {new Date(props.date).toLocaleDateString("en-US", {
           weekday: "long",
           year: "numeric",
@@ -26,144 +29,91 @@ const UpcomingEvent = (props: UpcomingEventProps) => {
           timeZone: "UTC",
         })}
       </p>
-      {/* <p className="pt-2 font-light text-white/60">{props.description}</p> */}
-      <PortableText
-        value={props.description}
-        components={myPortableTextComponentsNoMargin}
-      />
-      <hr className="mt-4 opacity-20" />
+      <PortableText value={props.description} components={myPortableTextComponentsNoMargin} />
     </div>
   );
 };
 
-const HoveringPlayer = (props: any) => {
-  return (
-    <div className="mx-auto h-full p-8 w-1/2">
-      <div className="h-[300px] md:h-[420px] xl:h-[650px] flex flex-col md:flex-row gap-y-4 gap-x-8 2xl:gap-x-16 items-center justify-center rounded-2xl drop-shadow-2xl">
-        {/* <p className="text-amber-500">Latest Sermon</p>
-          <p className=" text-3xl text-white">Passage / Sermon Title</p>
-          <p className="font-extralight">Jan 29 2023</p> */}
-        <Link
-          className="py-1 px-3 xl:px-5 xl:py-2 rounded-lg bg-stone-800 text-md md:text-xl xl:text-2xl xl:font-light text-white hover:text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:scale-110"
-          href={props.siteSettings.youtubeLink}
-        >
-          <span className="ml-1 flex items-center justify-between">
-            <span>Watch</span>
-            <Image
-              src="/assets/icons/youtube.svg"
-              alt=""
-              width={40}
-              height={40}
-              className="ml-1"
-              unoptimized
-            />
-          </span>
-        </Link>
-        <Link
-          className="py-1 px-3 xl:px-5 xl:py-2 rounded-lg bg-stone-800 text-md md:text-xl xl:text-2xl xl:font-light text-white hover:text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:scale-110"
-          href={props.siteSettings.podcastLink}
-        >
-          <span className="ml-1 flex items-center justify-between">
-            <span>Listen</span>
-            <Image
-              src="/assets/icons/headphones.svg"
-              alt=""
-              width={40}
-              height={40}
-              className="ml-1"
-              unoptimized
-            />
-          </span>
-        </Link>
-      </div>
-    </div>
-  );
-};
-
-// const BlockPlayer = (props: any) => {
-//   return (
-//     <div className="h-40 bg-[url('/assets/images/cross-hill-middle-east.png')] bg-cover bg-center bg-no-repeat md:hidden md:h-96">
-//       <div className="flex h-full flex-col justify-center bg-black/50 p-4 hover:bg-black/20">
-//         <div className="md:pl-8">
-//           {/* <p className="text-amber-500">Latest Sermon</p>
-//           <p className="text-3xl text-white">Passage / Sermon Title</p>
-//           <p className="font-extralight">Jan 29 2023</p> */}
-//         </div>
-//         <Link
-//           className="mx-auto rounded-lg border-amber-500 bg-stone-700 px-2 text-xl text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:border hover:text-amber-500 hover:drop-shadow-2xl"
-//           href={props.siteSettings.youtubeLink}
-//         >
-//           <span className="ml-1 flex items-center justify-between">
-//             <span>Watch</span>
-//             <img
-//               src="/assets/icons/youtube.svg"
-//               alt=""
-//               className="ml-2 h-10 w-10"
-//             />
-//           </span>
-//         </Link>
-//         <Link
-//           className="mx-auto mt-2 rounded-lg border-amber-500 bg-stone-700 px-2 text-xl text-amber-500 drop-shadow-2xl transition duration-300 ease-in-out hover:translate-y-1 hover:scale-110 hover:border hover:text-amber-500 hover:drop-shadow-2xl"
-//           href={props.siteSettings.podcastLink}
-//         >
-//           <span className="ml-1 flex items-center justify-between">
-//             <span>Listen</span>
-//             <img
-//               src="/assets/icons/headphones.svg"
-//               alt=""
-//               className="ml-1 h-10 w-10"
-//             />
-//           </span>
-//         </Link>
-//       </div>
-//     </div>
-//   );
-// };
+const MediaLink = ({ href, icon, label }: { href: string; icon: string; label: string }) => (
+  <Link
+    href={href}
+    className="inline-flex items-center gap-3 rounded-full bg-stone-900/80 px-6 py-3 text-lg font-medium text-white shadow-xl ring-1 ring-white/15 backdrop-blur transition hover:-translate-y-0.5 hover:text-amber-500 hover:ring-amber-500/60 md:text-xl"
+  >
+    {label}
+    <Image src={icon} alt="" width={32} height={32} className="h-7 w-7 md:h-8 md:w-8" unoptimized />
+  </Link>
+);
 
 const Index = (props: any) => {
+  const { siteSettings } = props;
+
   return (
-    <div className="flex min-h-screen flex-col bg-gradient-to-r  from-stone-900 to-stone-800 font-Raleway text-white/90">
-      <div className="h-[350px] sm:h-[450px] md:h-[600px] xl:h-[800px] bg-[url('/assets/images/pulpit-short.webp')] bg-cover bg-center bg-no-repeat">
-        <div className="h-full bg-black/40">
-          <Navbar logoUrl={urlFor(props.siteSettings.logo).width(600).url()} />
-          <div className="relative mx-auto flex max-w-[1400px] flex-row">
-            {/* <div className="py-8 px-2 text-center text-5xl font-extralight md:w-2/3 md:pt-32 md:pl-12 md:text-left md:text-6xl lg:w-1/2 lg:pt-40">
-              {props.siteSettings.heading}
-            </div> */}
-            <HoveringPlayer {...props} />
+    <div className="flex min-h-screen flex-col bg-gradient-to-r from-stone-900 to-stone-800 text-white/90">
+      <section className="bg-[url('/assets/images/pulpit-short.webp')] bg-cover bg-center bg-no-repeat">
+        <div className="flex min-h-[75svh] flex-col bg-gradient-to-b from-black/50 via-black/40 to-black/60 sm:min-h-[560px] md:min-h-[680px] xl:min-h-[800px]">
+          <Navbar logoUrl={urlFor(siteSettings.logo).width(600).url()} />
+          <div className="mx-auto flex w-full max-w-[1200px] grow flex-col items-center justify-center px-6 pb-16 text-center">
+            <h1 className="max-w-3xl font-display text-4xl font-bold text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)] sm:text-5xl md:text-6xl">
+              {siteSettings.heading ?? `Welcome to ${AppConfig.title}`}
+            </h1>
+            <div className="mt-8 flex flex-wrap justify-center gap-4 md:mt-10">
+              <MediaLink href={siteSettings.youtubeLink} icon="/assets/icons/youtube.svg" label="Watch" />
+              <MediaLink
+                href={siteSettings.podcastLink}
+                icon="/assets/icons/headphones.svg"
+                label="Listen"
+              />
+            </div>
           </div>
         </div>
-      </div>
-      {/* <BlockPlayer {...props} /> */}
-      <div className="items-left flex h-40 flex-col justify-center bg-gradient-to-r from-stone-400 to-stone-400/80 text-lg text-black md:text-2xl">
-        <div className="justify-beginning mx-auto">
-          <p className="font-medium">{props.siteSettings.serviceHeading}</p>
-          <p className="font-light">{props.siteSettings.serviceTime}</p>
-          <Link href={props.siteSettings.addressLink}>
-            <span className="group flex items-center justify-between font-light text-black ">
-              <span className="text-base group-hover:underline group-hover:decoration-amber-500 md:text-2xl">
-                218 Glover Road, Stoney Creek, ON L8E 5H6
+      </section>
+
+      <HomeBanner builtOver={props.eibBuiltOver} />
+
+      {/* a light band between the dark hero and footer; opted out of
+          browser-forced dark modes, which would repaint it */}
+      <section className="bg-[#f3ece1] text-stone-900" style={{ colorScheme: "only light" }}>
+        <div className="mx-auto flex max-w-[1200px] flex-col gap-4 px-6 py-10 sm:flex-row sm:items-end sm:justify-between md:py-14">
+          <div>
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-amber-700">
+              {siteSettings.serviceHeading}
+            </p>
+            <p className="mt-2 font-display text-3xl font-semibold text-stone-900 md:text-4xl">
+              {siteSettings.serviceTime}
+            </p>
+          </div>
+          <Link
+            href={siteSettings.addressLink}
+            className="group text-stone-700 hover:text-stone-900 md:text-lg"
+          >
+            <span className="decoration-amber-600 underline-offset-4 group-hover:underline">
+              218 Glover Road, Stoney Creek, ON{" "}
+            </span>
+            {/* postcode and arrow stay together so the arrow never wraps alone */}
+            <span className="whitespace-nowrap">
+              <span className="decoration-amber-600 underline-offset-4 group-hover:underline">
+                L8E 5H6
               </span>
               <Image
                 src="/assets/icons/navigation.svg"
                 alt=""
                 width={20}
                 height={20}
-                className="mx-1 transition ease-in-out group-hover:translate-x-1 group-hover:rotate-45 group-hover:scale-110"
+                className="ml-2 inline align-[-3px] transition ease-in-out group-hover:translate-x-1 group-hover:rotate-45 group-hover:scale-110"
                 unoptimized
               />
             </span>
           </Link>
         </div>
-      </div>
+      </section>
 
-      <div className="grow bg-gradient-to-r from-stone-800 to-stone-900  text-white/80">
+      <main className="grow">
         {props.upcomingEvents.length > 0 && (
-          <div className="pb-20 pt-4">
-            <p className="py-4 text-center text-3xl font-medium">
+          <section className="mx-auto max-w-[1000px] px-6 py-16">
+            <h2 className="text-center font-display text-3xl font-semibold text-white">
               Upcoming Events
-            </p>
-            <div className="mx-auto grid max-w-[900px] grid-cols-1 items-end gap-1 sm:grid-cols-2 lg:grid-cols-3">
+            </h2>
+            <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {props.upcomingEvents
                 .slice(0, process.env.NEXT_PUBLIC_UPCOMING_EVENTS_LIMIT)
                 .map((upcomingEvent: UpcomingEventProps) => {
@@ -177,10 +127,10 @@ const Index = (props: any) => {
                   );
                 })}
             </div>
-          </div>
+          </section>
         )}
-      </div>
-      <Footer siteSettings={props.siteSettings} />
+      </main>
+      <Footer siteSettings={siteSettings} />
     </div>
   );
 };
@@ -189,11 +139,7 @@ export async function getStaticProps() {
   const today = new Date();
   const todayFormatted = today.toISOString().split("T")[0];
 
-  const siteSettings = await client
-    .fetch(`*[_id == "siteSettings"]`)
-    .then((settings: any[]) => {
-      return settings[0];
-    });
+  const siteSettings = await fetchSiteSettings();
   const upcomingEvents = await client.fetch(
     `*[_type == "upcomingEvent" && date >= '${todayFormatted}'] | order(date asc)`
   );
@@ -201,6 +147,7 @@ export async function getStaticProps() {
     props: {
       siteSettings,
       upcomingEvents,
+      eibBuiltOver: isEibOver(),
     },
   };
 }

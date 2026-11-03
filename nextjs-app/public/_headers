@@ -2,4 +2,6 @@
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
+  # keep every page and file out of search results and AI tools (see robots.txt)
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet, noimageindex
 

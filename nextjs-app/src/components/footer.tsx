@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import { AppConfig } from '@/utils/AppConfig';
+import { SITE_FONTS } from '@/utils/fonts';
 
 const formatPhoneNumber = (phoneNumberString: string) => {
   const cleaned = `${phoneNumberString}`.replace(/\D/g, '');
@@ -11,17 +12,21 @@ const formatPhoneNumber = (phoneNumberString: string) => {
   return null;
 };
 
+const FooterLabel = ({ children }: { children: string }) => (
+  <h2 className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-amber-500">{children}</h2>
+);
+
 const Footer = (props: any) => {
   return (
-    <footer>
-      <div className="mx-auto flex w-[90%] max-w-[1200px] flex-col items-center justify-between space-y-8 border-t-2 border-white/20 py-8 text-sm sm:flex-row sm:space-y-0">
-        <div className="flex flex-col space-y-4 sm:flex-row sm:space-x-8 sm:space-y-0">
+    <footer className={SITE_FONTS}>
+      <div className="mx-auto max-w-[1200px] px-6">
+        <div className="grid gap-8 border-t border-white/15 py-10 sm:grid-cols-3 sm:gap-6">
           <div>
-            <p className="text-amber-500">Contact</p>
+            <FooterLabel>Contact</FooterLabel>
             <p>
               <Link
                 href={`tel:${props.siteSettings.footerContactPhone}`}
-                className="text-white hover:text-amber-500 hover:underline"
+                className="hover:text-amber-500 hover:underline"
               >
                 {formatPhoneNumber(props.siteSettings.footerContactPhone)}
               </Link>
@@ -29,31 +34,31 @@ const Footer = (props: any) => {
             <p>
               <Link
                 href={`mailto:${props.siteSettings.footerContactEmail}`}
-                className="text-white hover:text-amber-500 hover:underline"
+                className="hover:text-amber-500 hover:underline"
               >
                 {props.siteSettings.footerContactEmail}
               </Link>
             </p>
           </div>
           <div>
-            <p className="text-amber-500">Office Hours</p>
+            <FooterLabel>Office Hours</FooterLabel>
             <p>{props.siteSettings.officeHoursLine1}</p>
             <p>{props.siteSettings.officeHoursLine2}</p>
           </div>
-        </div>
-        <div>
-          <p className="pb-2 text-center text-amber-500">
+          <div>
+            <FooterLabel>Newsletter</FooterLabel>
+            <p className="opacity-80">News and events from the church, by email.</p>
             <Link
               href={props.siteSettings.newsletterSignupFormLink}
-              className="text-amber-500 hover:underline"
+              className="mt-3 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-semibold ring-1 ring-white/25 transition hover:text-amber-500 hover:ring-amber-500"
             >
-              Sign Up for our Email Newsletter! ✉️
+              Sign up <span aria-hidden>→</span>
             </Link>
-          </p>
-          <p>
-            © Copyright {new Date().getFullYear()} {AppConfig.title}
-          </p>
+          </div>
         </div>
+        <p className="border-t border-white/10 py-6 text-xs opacity-60">
+          © {new Date().getFullYear()} {AppConfig.title} · 218 Glover Road, Stoney Creek, ON
+        </p>
       </div>
     </footer>
   );
