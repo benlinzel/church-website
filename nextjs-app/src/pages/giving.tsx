@@ -1,3 +1,4 @@
+import CopyText from "@/components/CopyText";
 import PageLayout from "@/components/PageLayout";
 import { fetchSiteSettings } from "@/utils/sanity.client";
 
@@ -9,10 +10,8 @@ const Giving = (props: any) => {
           We can only accept Interac E-Transfers at this time.
         </p>
         <p className="mt-6">Please send E-Transfer donations to:</p>
-        <p className="mt-1 text-xl font-medium text-amber-500">
-          <a href={`mailto:${props.siteSettings.etransferEmail}`} className="hover:underline">
-            {props.siteSettings.etransferEmail}
-          </a>
+        <p className="mt-2 text-xl font-medium text-amber-500">
+          <CopyText text={props.siteSettings.etransferEmail} />
         </p>
       </div>
     </PageLayout>
