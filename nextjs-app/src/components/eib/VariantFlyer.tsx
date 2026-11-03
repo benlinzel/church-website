@@ -6,7 +6,7 @@ import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
 import { urlFor } from "@/utils/sanity.client";
 
-import { Candle, Donkey, Sheep } from "./art";
+import { Camel, Candle, Donkey, Sheep } from "./art";
 import { EIB } from "./content";
 import {
   countdownMessage,
@@ -175,9 +175,9 @@ const WhatToExpect = () => {
           </h2>
         </div>
         <ul className="grid grid-cols-2 gap-4">
-          {/* three tiles: the first spans the top row */}
+          {/* three tiles in an L: one top left, two along the bottom */}
           {EIB.highlights.map((h, i) => (
-            <li key={h.label} className="first:col-span-2">
+            <li key={h.label} className={i === 1 ? "col-start-1" : undefined}>
               <Reveal delay={i * 120} from="zoom" className="h-full">
                 <div className="flex h-full min-h-[150px] flex-col justify-between border-2 border-[#efe8dc]/35 p-5 transition duration-500 hover:-translate-y-1 hover:border-[#efe8dc]/70 md:min-h-[190px] md:p-6">
                   <p className="font-eibDisplay text-5xl font-extrabold uppercase leading-none tracking-[-0.04em] md:text-6xl">
@@ -278,6 +278,89 @@ const useJourneyPath = (ref: RefObject<HTMLDivElement | null>) => {
   }, [ref]);
 };
 
+// Parking card: the camel walks along the road to the parking sign as the
+// card scrolls up the screen. Sets --p (0..1) on the road, data-walking while
+// it is moving and data-arrived once it reaches the sign.
+const useParkingRoad = (ref: RefObject<HTMLDivElement | null>) => {
+  useEffect(() => {
+    const road = ref.current;
+    if (!road) return undefined;
+    const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let last = -1;
+    let stopTimer = 0;
+    const unsubscribe = subscribeToFrames(() => {
+      const vh = window.innerHeight;
+      const top = road.getBoundingClientRect().top;
+      // sets off as the road comes on screen, arrives when it's 45% from the top
+      const p = still ? 1 : Math.min(1, Math.max(0, (vh * 0.95 - top) / (vh * 0.5)));
+      road.style.setProperty("--p", p.toFixed(4));
+      road.dataset.arrived = String(p >= 0.99);
+      if (last >= 0 && p !== last && p < 0.99) {
+        road.dataset.walking = "true";
+        window.clearTimeout(stopTimer);
+        stopTimer = window.setTimeout(() => (road.dataset.walking = "false"), 180);
+      }
+      last = p;
+    });
+    return () => {
+      unsubscribe();
+      window.clearTimeout(stopTimer);
+    };
+  }, [ref]);
+};
+
+const ParkingRoad = () => {
+  const roadRef = useRef<HTMLDivElement>(null);
+  useParkingRoad(roadRef);
+
+  return (
+    <a
+      href={EIB.parkingMapsUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group block border-2 border-[#efe8dc]/35 px-5 pt-5 transition duration-500 hover:border-[#efe8dc]/70 md:px-8 md:pt-7"
+    >
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#efe8dc]/70">
+            Parking
+          </p>
+          <p className="mt-1 font-eibDisplay text-2xl font-extrabold uppercase leading-none tracking-[-0.03em] md:text-4xl">
+            Winona Vine Estates
+          </p>
+        </div>
+        <span className="rounded-full bg-[#efe8dc] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-[#7a1f1a] shadow-lg transition group-hover:-translate-y-0.5 group-hover:bg-white">
+          Get directions <span aria-hidden>↗</span>
+        </span>
+      </div>
+
+      <div
+        ref={roadRef}
+        aria-hidden
+        className="relative mt-2 h-24 [--camel:5.5rem] md:h-36 md:[--camel:8.5rem]"
+      >
+        <div className="absolute inset-x-0 bottom-3 border-b-2 border-dashed border-[#efe8dc]/40" />
+        <div
+          className="absolute bottom-3 w-[var(--camel)] text-[#efe8dc]"
+          style={{ left: "calc(var(--p, 0) * (100% - var(--camel) - 3.5rem))" }}
+        >
+          {/* hops when you hover the card */}
+          <div className="transition duration-300 group-hover:-translate-y-2 group-hover:-rotate-3">
+            <Camel className={`${styles.camel} block w-full`} />
+          </div>
+        </div>
+        <div className={`${styles.sign} absolute bottom-3 right-1 flex flex-col items-center`}>
+          <span className="grid h-9 w-9 place-items-center rounded-md bg-[#efe8dc] font-eibDisplay text-xl font-extrabold text-[#7d0b0b] shadow-lg md:h-11 md:w-11 md:text-2xl">
+            P
+          </span>
+          <span className="h-6 w-1 bg-[#efe8dc] md:h-9" />
+        </div>
+      </div>
+      <span className="sr-only"> (opens Google Maps in a new tab)</span>
+    </a>
+  );
+};
+
 const AtAGlance = () => {
   const pathRef = useRef<HTMLDivElement>(null);
   useJourneyPath(pathRef);
@@ -328,18 +411,12 @@ const AtAGlance = () => {
             ))}
           </ol>
         </div>
-        {/* the parking card's directions, without cluttering the card */}
-        <Reveal delay={500}>
-          <p className="mt-8 text-sm text-[#efe8dc]/80">
-            <a
-              href={EIB.parkingMapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline underline-offset-4 hover:text-white"
-            >
-              Directions to parking at Winona Vine Estates
-            </a>
-            {" · "}
+        {/* directions for the parking card, as their own little scene */}
+        <Reveal delay={200} className="mt-10">
+          <ParkingRoad />
+        </Reveal>
+        <Reveal delay={300}>
+          <p className="mt-6 text-sm text-[#efe8dc]/80">
             <a
               href={EIB.calendarUrl}
               target="_blank"

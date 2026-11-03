@@ -166,6 +166,46 @@
   animation: shine 4.5s linear infinite;
 }
 
+/* Parking road: the camel bobs while you scroll, the sign wobbles when it
+   arrives. data-walking / data-arrived are set by useParkingRoad. */
+@keyframes walk {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-4px) rotate(-2deg);
+  }
+}
+
+[data-walking="true"] .camel {
+  animation: walk 0.45s ease-in-out infinite;
+}
+
+@keyframes wobble {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-9deg);
+  }
+  50% {
+    transform: rotate(6deg);
+  }
+  75% {
+    transform: rotate(-3deg);
+  }
+}
+
+.sign {
+  transform-origin: 50% 100%;
+}
+
+[data-arrived="true"] .sign {
+  animation: wobble 0.7s ease-in-out;
+}
+
 /* Hero title: letters rise in one by one */
 @keyframes rise {
   from {
@@ -199,7 +239,9 @@
   .twinkle,
   .flame,
   .glow,
-  .shine {
+  .shine,
+  [data-walking] .camel,
+  [data-arrived] .sign {
     animation: none;
   }
   .letter {

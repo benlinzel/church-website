@@ -3,7 +3,7 @@
 import { useId } from "react";
 
 import styles from "./eib.module.css";
-import { DONKEY, SHEEP, type Silhouette } from "./silhouettes";
+import { CAMEL, DONKEY, SHEEP, type Silhouette } from "./silhouettes";
 
 type ArtProps = { className?: string };
 
@@ -23,6 +23,7 @@ const SilhouetteSvg = ({ art, className }: ArtProps & { art: Silhouette }) => (
 // translucent text colour, so overlapping animals don't darken each other.
 export const Donkey = ({ className }: ArtProps) => <SilhouetteSvg art={DONKEY} className={className} />;
 export const Sheep = ({ className }: ArtProps) => <SilhouetteSvg art={SHEEP} className={className} />;
+export const Camel = ({ className }: ArtProps) => <SilhouetteSvg art={CAMEL} className={className} />;
 
 export const Candle = ({ className, delay = 0 }: ArtProps & { delay?: number }) => {
   const id = useSvgId();
