@@ -6,6 +6,7 @@ import HomeBanner from "@/components/eib/HomeBanner";
 import { isEibOver } from "@/components/eib/timing";
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
+import SundayCta from "@/components/SundayCta";
 import { AppConfig } from "@/utils/AppConfig";
 import { myPortableTextComponentsNoMargin } from "@/utils/SanityConfig";
 import client, { fetchSiteSettings } from "@/utils/sanity.client";
@@ -129,6 +130,11 @@ const Index = (props: any) => {
         <div className="flex min-h-[75svh] flex-col bg-gradient-to-b from-black/60 via-black/20 to-black/85 sm:min-h-[560px] md:min-h-[680px] xl:min-h-[800px]">
           <Navbar logo={siteSettings.logo} />
           <div className="mx-auto flex w-full max-w-[1200px] grow flex-col items-center justify-end px-6 pb-14 text-center md:pb-20">
+            <SundayCta
+              serviceTime={siteSettings.serviceTime}
+              addressLink={siteSettings.addressLink}
+              youtubeLink={siteSettings.youtubeLink}
+            />
             <h1 className="max-w-4xl text-balance font-display text-4xl font-bold text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)] sm:text-5xl md:text-6xl">
               {siteSettings.heading ?? `Welcome to ${AppConfig.title}`}
             </h1>
