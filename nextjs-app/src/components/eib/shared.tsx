@@ -38,7 +38,7 @@ export interface EibVariantProps {
 export const cssVars = (vars: Record<string, string | number>) =>
   vars as CSSProperties;
 
-const subscribeToFrames = (update: () => void) => {
+export const subscribeToFrames = (update: () => void) => {
   let raf = 0;
   const onChange = () => {
     if (!raf) {

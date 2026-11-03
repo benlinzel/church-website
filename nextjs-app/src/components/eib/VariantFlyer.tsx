@@ -1,6 +1,6 @@
 // Variant 1: the printed flyer brought to life. Same suede red/green palette
 // and layout, with parallax animal silhouettes and scroll-linked headings.
-import { useRef } from "react";
+import { type RefObject, useEffect, useRef } from "react";
 
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
@@ -19,6 +19,7 @@ import {
   Reveal,
   RisingText,
   styles,
+  subscribeToFrames,
   useCountdown,
   useScrollProgress,
 } from "./shared";
@@ -252,60 +253,106 @@ const Register = () => (
   </section>
 );
 
-const AtAGlance = () => (
-  <section className={`${styles.texture} ${styles.red}`}>
-    <div className="mx-auto max-w-[1200px] px-6 py-20 md:py-28">
-      <Reveal from="left">
-        <h2 className="font-eibDisplay text-[clamp(3rem,8vw,5.75rem)] font-extrabold uppercase leading-[0.88] tracking-[-0.05em]">
-          Our event at-
-          <br />
-          a-glance
-        </h2>
-      </Reveal>
-      <ol className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {EIB.glance.map((item, i) => (
-          <li key={item.n}>
-            <Reveal delay={i * 120} className="h-full">
-              <div
-                className={`group flex h-full min-h-[300px] flex-col justify-between p-6 shadow-xl transition duration-500 hover:-translate-y-2 hover:rotate-[-1deg] ${GLANCE_CARD_STYLES[i]}`}
-              >
-                <div>
-                  <p className="text-xs tabular-nums">{item.n}</p>
-                  <h3 className="mt-1 font-eibBody text-[1.7rem] font-light tracking-tight">
-                    {item.title}
-                  </h3>
-                </div>
-                <p className="text-sm leading-relaxed opacity-90">{item.body}</p>
-              </div>
-            </Reveal>
-          </li>
-        ))}
-      </ol>
-      {/* the parking card's directions, without cluttering the card */}
-      <Reveal delay={500}>
-        <p className="mt-8 text-sm text-[#efe8dc]/80">
-          <a
-            href={EIB.parkingMapsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline underline-offset-4 hover:text-white"
-          >
-            Directions to parking at Winona Vine Estates
-          </a>
-          {" · "}
-          <a
-            href={EIB.calendarUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline underline-offset-4 hover:text-white"
-          >
-            Add to Google Calendar
-          </a>
-        </p>
-      </Reveal>
-    </div>
-  </section>
-);
+// Phone layout for the at-a-glance cards: a path from the first stop to the
+// last that fills as you scroll, lighting up each stop it reaches. Sets --len
+// and --p on the wrapper and data-active on each item; wider screens ignore them.
+const STOP_CENTER = 36; // px from the top of each item to its dot's centre
+
+const useJourneyPath = (ref: RefObject<HTMLDivElement | null>) => {
+  useEffect(() => {
+    const wrap = ref.current;
+    if (!wrap) return undefined;
+    const stops = Array.from(wrap.querySelectorAll("li"));
+    const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    return subscribeToFrames(() => {
+      const line = still ? Infinity : window.innerHeight * 0.65;
+      const centers = stops.map((stop) => stop.getBoundingClientRect().top + STOP_CENTER);
+      const first = centers[0] ?? 0;
+      const len = (centers[centers.length - 1] ?? first) - first;
+      const p = len > 0 ? Math.min(1, Math.max(0, (line - first) / len)) : 1;
+      wrap.style.setProperty("--len", `${len}px`);
+      wrap.style.setProperty("--p", p.toFixed(4));
+      stops.forEach((stop, i) => (stop.dataset.active = String((centers[i] ?? 0) <= line)));
+    });
+  }, [ref]);
+};
+
+const AtAGlance = () => {
+  const pathRef = useRef<HTMLDivElement>(null);
+  useJourneyPath(pathRef);
+
+  return (
+    <section className={`${styles.texture} ${styles.red}`}>
+      <div className="mx-auto max-w-[1200px] px-6 py-20 md:py-28">
+        <Reveal from="left">
+          <h2 className="font-eibDisplay text-[clamp(3rem,8vw,5.75rem)] font-extrabold uppercase leading-[0.88] tracking-[-0.05em]">
+            Our event at-
+            <br />
+            a-glance
+          </h2>
+        </Reveal>
+        <div ref={pathRef} className="relative mt-12 sm:mt-14">
+          {/* phone-only path: faint track plus a fill that follows the scroll */}
+          <span
+            aria-hidden
+            className="absolute left-[19px] top-9 h-[var(--len,0px)] w-0.5 bg-[#efe8dc]/25 sm:hidden"
+          />
+          <span
+            aria-hidden
+            className={`${styles.scrollFx} absolute left-[19px] top-9 h-[var(--len,0px)] w-0.5 origin-top scale-y-[var(--p,0)] bg-[#efe8dc] sm:hidden`}
+          />
+          <ol className="grid gap-4 pl-14 sm:grid-cols-2 sm:gap-5 sm:pl-0 lg:grid-cols-4">
+            {EIB.glance.map((item, i) => (
+              <li key={item.n} className="group/stop relative">
+                <span
+                  aria-hidden
+                  className="absolute left-[-3.5rem] top-4 grid h-10 w-10 place-items-center rounded-full border-2 border-[#efe8dc]/40 bg-[#8c3a35] text-xs font-semibold tabular-nums text-[#efe8dc]/70 transition duration-500 group-data-[active=true]/stop:scale-110 group-data-[active=true]/stop:border-[#efe8dc] group-data-[active=true]/stop:bg-[#efe8dc] group-data-[active=true]/stop:text-[#7d0b0b] sm:hidden"
+                >
+                  {item.n}
+                </span>
+                <Reveal delay={i * 120} className="h-full">
+                  <div
+                    className={`group flex h-full flex-col justify-between gap-3 p-5 shadow-xl transition duration-500 hover:-translate-y-2 hover:rotate-[-1deg] max-sm:opacity-55 max-sm:group-data-[active=true]/stop:opacity-100 sm:min-h-[260px] sm:p-6 lg:min-h-[300px] ${GLANCE_CARD_STYLES[i]}`}
+                  >
+                    <div>
+                      <p className="hidden text-xs tabular-nums sm:block">{item.n}</p>
+                      <h3 className="font-eibBody text-[1.6rem] font-light leading-tight tracking-tight sm:mt-1 sm:text-[1.7rem]">
+                        {item.title}
+                      </h3>
+                    </div>
+                    <p className="text-sm leading-relaxed opacity-90">{item.body}</p>
+                  </div>
+                </Reveal>
+              </li>
+            ))}
+          </ol>
+        </div>
+        {/* the parking card's directions, without cluttering the card */}
+        <Reveal delay={500}>
+          <p className="mt-8 text-sm text-[#efe8dc]/80">
+            <a
+              href={EIB.parkingMapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-4 hover:text-white"
+            >
+              Directions to parking at Winona Vine Estates
+            </a>
+            {" · "}
+            <a
+              href={EIB.calendarUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-4 hover:text-white"
+            >
+              Add to Google Calendar
+            </a>
+          </p>
+        </Reveal>
+      </div>
+    </section>
+  );
+};
 
 const Closing = () => (
   <section className={`${styles.texture} ${styles.green}`}>
