@@ -85,7 +85,8 @@ const Dropdown = ({
       <div
         id={menuId}
         className={`absolute top-full z-30 w-56 pt-2 transition duration-150 ease-out motion-reduce:transition-none ${
-          align === "left" ? "left-0" : "right-0"
+          // on phones both menus open leftwards from their button, so they stay on screen
+          align === "left" ? "right-0 sm:left-0 sm:right-auto" : "right-0"
         } ${open ? "visible translate-y-0 opacity-100" : "invisible -translate-y-1 opacity-0"}`}
       >
         <ul className="rounded-xl bg-stone-900/95 p-1.5 text-[15px] shadow-2xl ring-1 ring-white/10 backdrop-blur-md">

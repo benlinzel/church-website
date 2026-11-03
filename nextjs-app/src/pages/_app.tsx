@@ -37,7 +37,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
         twitter: { cardType: "summary_large_image" },
       })}
     </Head>
-    <div className={`${siteFontVars} ${SITE_FONTS}`}>
+    {/* overflow-x-clip (not hidden) so nothing can widen the page sideways
+        without breaking position: sticky */}
+    <div className={`${siteFontVars} ${SITE_FONTS} overflow-x-clip`}>
       <Component {...pageProps} />
     </div>
   </>

@@ -87,16 +87,22 @@ const Index = (props: any) => {
             className="group text-stone-700 hover:text-stone-900 md:text-lg"
           >
             <span className="decoration-amber-600 underline-offset-4 group-hover:underline">
-              218 Glover Road, Stoney Creek, ON L8E 5H6
+              218 Glover Road, Stoney Creek, ON{" "}
             </span>
-            <Image
-              src="/assets/icons/navigation.svg"
-              alt=""
-              width={20}
-              height={20}
-              className="ml-2 inline align-[-3px] transition ease-in-out group-hover:translate-x-1 group-hover:rotate-45 group-hover:scale-110"
-              unoptimized
-            />
+            {/* postcode and arrow stay together so the arrow never wraps alone */}
+            <span className="whitespace-nowrap">
+              <span className="decoration-amber-600 underline-offset-4 group-hover:underline">
+                L8E 5H6
+              </span>
+              <Image
+                src="/assets/icons/navigation.svg"
+                alt=""
+                width={20}
+                height={20}
+                className="ml-2 inline align-[-3px] transition ease-in-out group-hover:translate-x-1 group-hover:rotate-45 group-hover:scale-110"
+                unoptimized
+              />
+            </span>
           </Link>
         </div>
       </section>
