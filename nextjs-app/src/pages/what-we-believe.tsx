@@ -15,7 +15,7 @@ const WhatWeBelieve = (props: any) => {
           .filter((faithArticle: any) => faithArticle.title)
           .map((faithArticle: any) => {
             return (
-              <section key={`${faithArticle.order}-${faithArticle.title}`} className="py-8">
+              <section key={faithArticle._id} className="py-8">
                 <h3 className="font-display text-2xl font-medium text-amber-500">
                   {faithArticle.title}
                 </h3>

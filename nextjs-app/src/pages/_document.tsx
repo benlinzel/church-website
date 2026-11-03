@@ -2,7 +2,7 @@ import Document, { Head, Html, Main, NextScript } from 'next/document';
 
 import { AppConfig } from '@/utils/AppConfig';
 
-// Need to create a custom _document because i18n support is not compatible with `next export`.
+// Sets the page language (Next's i18n config doesn't work with a static export).
 class MyDocument extends Document {
   render() {
     return (
