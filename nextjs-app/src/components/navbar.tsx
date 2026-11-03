@@ -1,19 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
+
+// The library lives on a library. subdomain of whichever host serves the site.
+const libraryUrlForHost = () => {
+  const parts = window.location.hostname.split(".");
+  if (parts[0] === "www") {
+    parts.shift();
+  }
+  return `${window.location.protocol}//library.${parts.join(".")}`;
+};
+
+const subscribeNever = () => () => {};
 
 const Navbar = (props: any) => {
-  const [libraryUrl, setLibraryUrl] = useState("#");
-
-  useEffect(() => {
-    const host = window.location.hostname;
-    const parts = host.split(".");
-    if (parts[0] === "www") {
-      parts.shift();
-    }
-    const newHost = `library.${parts.join(".")}`;
-    setLibraryUrl(`${window.location.protocol}//${newHost}`);
-  }, []);
+  const libraryUrl = useSyncExternalStore(subscribeNever, libraryUrlForHost, () => "#");
 
   return (
     <div className="mx-auto flex h-16 max-w-[1200px] flex-row items-center justify-between p-4 sm:h-28">

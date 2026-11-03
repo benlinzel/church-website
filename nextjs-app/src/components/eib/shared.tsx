@@ -155,26 +155,23 @@ export const RisingText = ({
   text: string;
   offset?: number;
 }) => {
-  let index = offset;
+  const words = text.split(" ");
+  // each word's first letter number, counting across the whole line
+  const starts = words.map((_, w) => offset + words.slice(0, w).join("").length);
   return (
     <span aria-label={text}>
-      {text.split(" ").map((word, w) => (
-        // eslint-disable-next-line react/no-array-index-key
+      {words.map((word, w) => (
         <span key={w} aria-hidden className="inline-block whitespace-nowrap">
-          {word.split("").map((char, i) => {
-            index += 1;
-            return (
-              <span
-                // eslint-disable-next-line react/no-array-index-key
-                key={i}
-                className={styles.letter}
-                style={cssVars({ "--i": index })}
-              >
-                {char}
-              </span>
-            );
-          })}
-          {w < text.split(" ").length - 1 ? "\u00A0" : ""}
+          {word.split("").map((char, i) => (
+            <span
+              key={i}
+              className={styles.letter}
+              style={cssVars({ "--i": (starts[w] ?? offset) + i + 1 })}
+            >
+              {char}
+            </span>
+          ))}
+          {w < words.length - 1 ? "\u00A0" : ""}
         </span>
       ))}
     </span>

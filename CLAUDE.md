@@ -49,7 +49,7 @@ pnpm dev:site             # Next.js dev server
 pnpm dev:studio           # Sanity Studio dev server
 pnpm build:site           # next build (static export to nextjs-app/out)
 pnpm build:studio         # sanity build
-pnpm lint                 # next lint (site only — studio has no lint script)
+pnpm lint                 # eslint (site only — studio has no lint script)
 pnpm login:studio         # sanity login (run from studio context)
 pnpm deploy:studio        # sanity deploy (pushes Studio to Sanity hosting)
 pnpm backup:sanity        # see "Sanity backups" below

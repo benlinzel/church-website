@@ -55,6 +55,17 @@ overrides:
   'ws@7': '7.5.13'
   'ws@8': '8.21.3'
 
+# next's .d.ts files import React's types, but next doesn't declare
+# @types/react as a peer, so under pnpm's strict layout TypeScript can't find
+# them from inside next and its components (Head, NextScript...) type as broken.
+packageExtensions:
+  next:
+    peerDependencies:
+      '@types/react': '*'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+
 # Allow these specific packages to run install scripts. Everything else is blocked.
 # pnpm 11 syntax — `onlyBuiltDependencies` (the v10 name) is NOT recognized here.
 allowBuilds:

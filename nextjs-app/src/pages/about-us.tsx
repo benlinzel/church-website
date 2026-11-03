@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 import { PortableText } from "@portabletext/react";
 import Link from "next/link";
 
