@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import { AppConfig } from '@/utils/AppConfig';
+import { SITE_FONTS } from '@/utils/fonts';
 
 const formatPhoneNumber = (phoneNumberString: string) => {
   const cleaned = `${phoneNumberString}`.replace(/\D/g, '');
@@ -13,7 +14,7 @@ const formatPhoneNumber = (phoneNumberString: string) => {
 
 const Footer = (props: any) => {
   return (
-    <footer>
+    <footer className={SITE_FONTS}>
       <div className="mx-auto flex w-[90%] max-w-[1200px] flex-col items-center justify-between space-y-8 border-t-2 border-white/20 py-8 text-sm sm:flex-row sm:space-y-0">
         <div className="flex flex-col space-y-4 sm:flex-row sm:space-x-8 sm:space-y-0">
           <div>

@@ -21,15 +21,15 @@ const EibEnded = ({ siteSettings }: Pick<EibVariantProps, "siteSettings">) => (
       </div>
 
       <div className="relative mx-auto max-w-[1200px] px-6 pb-44 pt-10 md:pb-56 md:pt-16">
-        <p className="font-eibDisplay text-sm font-semibold uppercase tracking-[0.25em] text-[#efe8dc]/80">
+        <p className="font-display text-sm font-semibold uppercase tracking-[0.25em] text-[#efe8dc]/80">
           {EIB.dateLong}
         </p>
-        <h1 className="mt-4 font-eibDisplay text-[clamp(3rem,9.4vw,8.5rem)] font-extrabold uppercase leading-[0.86] tracking-[-0.05em]">
+        <h1 className="mt-4 font-display text-[clamp(3rem,9.4vw,8.5rem)] font-extrabold uppercase leading-[0.86] tracking-[-0.05em]">
           An Evening in
           <br />
           Bethlehem
         </h1>
-        <p className="mt-10 max-w-xl font-eibDisplay text-lg font-semibold uppercase leading-snug tracking-wide md:text-xl">
+        <p className="mt-10 max-w-xl font-display text-lg font-semibold uppercase leading-snug tracking-wide md:text-xl">
           Thank you to everyone who journeyed with us! This year&rsquo;s event has ended.
         </p>
         <Link

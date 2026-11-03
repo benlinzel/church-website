@@ -10,21 +10,17 @@ import {
   useState,
 } from "react";
 
-import client from "@/utils/sanity.client";
+import { fetchSiteSettings } from "@/utils/sanity.client";
 
 import { EIB } from "./content";
 import styles from "./eib.module.css";
-import { eibFontVars } from "./fonts";
+import { EIB_FONTS } from "./fonts";
 import { isEibOver } from "./timing";
 
 export { styles };
 
 export async function getEibStaticProps() {
-  const siteSettings = await client
-    .fetch(`*[_id == "siteSettings"]`)
-    .then((settings: any[]) => {
-      return settings[0];
-    });
+  const siteSettings = await fetchSiteSettings();
   return {
     props: {
       siteSettings,
@@ -316,7 +312,7 @@ export const EibShell = ({
   const description = `${EIB.tagline} at ${EIB.venue}, ${EIB.dateLong}, ${EIB.time}. Free. Registration required.`;
 
   return (
-    <div className={`${eibFontVars} overflow-x-clip font-eibBody ${className}`}>
+    <div className={`${EIB_FONTS} overflow-x-clip ${className}`}>
       <Head>
         {generateNextSeo({
           title: `${EIB.title} | ${EIB.dateShort}`,

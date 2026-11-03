@@ -17,3 +17,6 @@ export function urlFor(source: SanityImageSource) {
 }
 
 export default client;
+
+// The singleton siteSettings document (logo, service times, footer details).
+export const fetchSiteSettings = () => client.fetch(`*[_id == "siteSettings"][0]`);

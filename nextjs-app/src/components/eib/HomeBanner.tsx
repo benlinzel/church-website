@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Donkey, Sheep } from "./art";
 import { EIB } from "./content";
 import styles from "./eib.module.css";
-import { eibDisplayFont } from "./fontDisplay";
+import { EIB_BANNER_FONTS } from "./fonts";
 import { EibOverScript, HIDE_WHEN_OVER, useEibOver } from "./timing";
 
 const HomeBanner = ({ builtOver }: { builtOver: boolean }) => {
@@ -20,7 +20,7 @@ const HomeBanner = ({ builtOver }: { builtOver: boolean }) => {
         aria-label={EIB.title}
         // opt this block out of browser-forced dark themes (see EibShell)
         style={{ colorScheme: "only light" }}
-        className={`${eibDisplayFont.variable} ${styles.texture} ${styles.red} ${HIDE_WHEN_OVER} relative overflow-hidden text-[#efe8dc]`}
+        className={`${EIB_BANNER_FONTS} ${styles.texture} ${styles.red} ${HIDE_WHEN_OVER} relative overflow-hidden text-[#efe8dc]`}
       >
         <div aria-hidden className="pointer-events-none absolute bottom-0 right-[-2%] flex items-end gap-2 text-black opacity-[0.16]">
           <Sheep className="w-20 -scale-x-100 md:w-28" />
@@ -37,7 +37,7 @@ const HomeBanner = ({ builtOver }: { builtOver: boolean }) => {
               <span className="hidden sm:inline"> · </span>
               <span className="block sm:inline">{EIB.time}</span>
             </p>
-            <h2 className="mt-3 font-[family-name:var(--font-eib-display)] text-[clamp(2.25rem,5.5vw,4rem)] font-extrabold uppercase leading-[0.88] tracking-[-0.05em]">
+            <h2 className="mt-3 font-display text-[clamp(2.25rem,5.5vw,4rem)] font-extrabold uppercase leading-[0.88] tracking-[-0.05em]">
               An Evening in Bethlehem
             </h2>
             <p className="mt-3 max-w-xl text-base md:text-lg">

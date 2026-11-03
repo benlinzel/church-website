@@ -82,7 +82,7 @@ const Hero = ({ logoUrl }: { logoUrl?: string }) => {
           </div>
         </div>
 
-        <h1 className="font-eibDisplay text-[clamp(3rem,9.4vw,8.5rem)] font-extrabold uppercase leading-[0.86] tracking-[-0.05em] md:pr-28">
+        <h1 className="font-display text-[clamp(3rem,9.4vw,8.5rem)] font-extrabold uppercase leading-[0.86] tracking-[-0.05em] md:pr-28">
           <RisingText text="An Evening in" />
           <br />
           <RisingText text="Bethlehem" offset={13} />
@@ -90,7 +90,7 @@ const Hero = ({ logoUrl }: { logoUrl?: string }) => {
 
         <div className="mt-10 grid gap-10 md:mt-14 md:grid-cols-2 md:items-end">
           <Reveal delay={700} from="right" className="md:order-last">
-            <p className="font-eibDisplay text-3xl font-bold uppercase leading-[1.02] tracking-tight md:text-right md:text-[2.75rem]">
+            <p className="font-display text-3xl font-bold uppercase leading-[1.02] tracking-tight md:text-right md:text-[2.75rem]">
               {EIB.dateShort}
               <br />
               5:30–8:30PM
@@ -98,7 +98,7 @@ const Hero = ({ logoUrl }: { logoUrl?: string }) => {
           </Reveal>
 
           <Reveal delay={900}>
-            <div className="space-y-6 font-eibDisplay text-base font-semibold uppercase tracking-wide md:text-lg">
+            <div className="space-y-6 font-display text-base font-semibold uppercase tracking-wide md:text-lg">
               <p className="max-w-sm">{EIB.tagline}</p>
               <address className="not-italic">
                 {EIB.venue}
@@ -129,14 +129,14 @@ const Hero = ({ logoUrl }: { logoUrl?: string }) => {
 
       <div className="relative border-t border-white/10 bg-black/15">
         <div className="mx-auto flex max-w-[1200px] flex-col items-center justify-between gap-4 px-6 py-5 sm:flex-row">
-          <p className="font-eibDisplay text-sm font-semibold uppercase tracking-[0.2em] text-[#efe8dc]/80">
+          <p className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-[#efe8dc]/80">
             {message ?? "The journey begins in"}
           </p>
           {!message && (
             <div className="flex gap-6 sm:gap-10" aria-live="off">
               {countdownUnits(countdown).map((unit) => (
                 <div key={unit.label} className="text-center">
-                  <div className="font-eibDisplay text-3xl font-extrabold tabular-nums tracking-tight sm:text-4xl">
+                  <div className="font-display text-3xl font-extrabold tabular-nums tracking-tight sm:text-4xl">
                     {unit.value}
                   </div>
                   <div className="text-[10px] uppercase tracking-[0.25em] text-[#efe8dc]/70">
@@ -161,12 +161,12 @@ const WhatToExpect = () => {
       <div className="mx-auto grid max-w-[1200px] items-center gap-12 px-6 py-20 md:grid-cols-[1.15fr_1fr] md:py-28">
         <div>
           <Reveal>
-            <p className="max-w-xl font-eibDisplay text-lg font-semibold uppercase leading-snug tracking-wide md:text-xl">
+            <p className="max-w-xl font-display text-lg font-semibold uppercase leading-snug tracking-wide md:text-xl">
               {EIB.intro}
             </p>
           </Reveal>
           <h2
-            className={`${styles.scrollFx} mt-14 font-eibDisplay text-[clamp(3.5rem,9vw,6rem)] font-extrabold uppercase leading-[0.86] tracking-[-0.05em]`}
+            className={`${styles.scrollFx} mt-14 font-display text-[clamp(3.5rem,9vw,6rem)] font-extrabold uppercase leading-[0.86] tracking-[-0.05em]`}
             style={{ transform: "translateX(calc((0.55 - var(--p, 0.55)) * 40%))" }}
           >
             What to
@@ -180,7 +180,7 @@ const WhatToExpect = () => {
             <li key={h.label} className={i === 1 ? "col-start-1" : undefined}>
               <Reveal delay={i * 120} from="zoom" className="h-full">
                 <div className="flex h-full min-h-[150px] flex-col justify-between border-2 border-[#efe8dc]/35 p-5 transition duration-500 hover:-translate-y-1 hover:border-[#efe8dc]/70 md:min-h-[190px] md:p-6">
-                  <p className="font-eibDisplay text-5xl font-extrabold uppercase leading-none tracking-[-0.04em] md:text-6xl">
+                  <p className="font-display text-5xl font-extrabold uppercase leading-none tracking-[-0.04em] md:text-6xl">
                     {h.big}
                   </p>
                   <p className="mt-4 text-sm font-semibold uppercase tracking-[0.15em] text-[#efe8dc]/85">
@@ -206,7 +206,7 @@ const Register = () => (
         <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#8c3a35]">
           Free · Registration required
         </p>
-        <h2 className="mt-3 font-eibDisplay text-[clamp(3rem,7vw,5.25rem)] font-extrabold uppercase leading-[0.88] tracking-[-0.05em] text-[#8c3a35]">
+        <h2 className="mt-3 font-display text-[clamp(3rem,7vw,5.25rem)] font-extrabold uppercase leading-[0.88] tracking-[-0.05em] text-[#8c3a35]">
           Reserve
           <br />
           your time
@@ -232,7 +232,7 @@ const Register = () => (
             {EIB.timeSlots.map((slot) => (
               <li
                 key={slot}
-                className="rounded-full border-2 border-[#4b5c43]/40 px-4 py-1.5 font-eibDisplay text-lg font-bold tabular-nums text-[#4b5c43]"
+                className="rounded-full border-2 border-[#4b5c43]/40 px-4 py-1.5 font-display text-lg font-bold tabular-nums text-[#4b5c43]"
               >
                 {slot}
               </li>
@@ -325,7 +325,7 @@ const ParkingRoad = () => {
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#efe8dc]/70">
             Parking
           </p>
-          <p className="mt-1 font-eibDisplay text-2xl font-extrabold uppercase leading-none tracking-[-0.03em] md:text-4xl">
+          <p className="mt-1 font-display text-2xl font-extrabold uppercase leading-none tracking-[-0.03em] md:text-4xl">
             Winona Vine Estates
           </p>
         </div>
@@ -350,7 +350,7 @@ const ParkingRoad = () => {
           </div>
         </div>
         <div className={`${styles.sign} absolute bottom-3 right-1 flex flex-col items-center`}>
-          <span className="grid h-9 w-9 place-items-center rounded-md bg-[#efe8dc] font-eibDisplay text-xl font-extrabold text-[#7d0b0b] shadow-lg md:h-11 md:w-11 md:text-2xl">
+          <span className="grid h-9 w-9 place-items-center rounded-md bg-[#efe8dc] font-display text-xl font-extrabold text-[#7d0b0b] shadow-lg md:h-11 md:w-11 md:text-2xl">
             P
           </span>
           <span className="h-6 w-1 bg-[#efe8dc] md:h-9" />
@@ -369,7 +369,7 @@ const AtAGlance = () => {
     <section className={`${styles.texture} ${styles.red}`}>
       <div className="mx-auto max-w-[1200px] px-6 py-20 md:py-28">
         <Reveal from="left">
-          <h2 className="font-eibDisplay text-[clamp(3rem,8vw,5.75rem)] font-extrabold uppercase leading-[0.88] tracking-[-0.05em]">
+          <h2 className="font-display text-[clamp(3rem,8vw,5.75rem)] font-extrabold uppercase leading-[0.88] tracking-[-0.05em]">
             Our event at-
             <br />
             a-glance
@@ -400,7 +400,7 @@ const AtAGlance = () => {
                   >
                     <div>
                       <p className="hidden text-xs tabular-nums sm:block">{item.n}</p>
-                      <h3 className="font-eibBody text-[1.6rem] font-light leading-tight tracking-tight sm:mt-1 sm:text-[1.7rem]">
+                      <h3 className="font-sans text-[1.6rem] font-light leading-tight tracking-tight sm:mt-1 sm:text-[1.7rem]">
                         {item.title}
                       </h3>
                     </div>
@@ -437,7 +437,7 @@ const Closing = () => (
     <div className="mx-auto grid max-w-[1200px] items-center gap-14 px-6 py-20 md:grid-cols-[1.2fr_1fr] md:py-28">
       <div>
         <Reveal>
-          <h2 className="font-eibDisplay text-[clamp(3rem,8vw,5.5rem)] font-extrabold uppercase leading-[0.88] tracking-[-0.05em]">
+          <h2 className="font-display text-[clamp(3rem,8vw,5.5rem)] font-extrabold uppercase leading-[0.88] tracking-[-0.05em]">
             We can&rsquo;t
             <br />
             wait to see
@@ -446,10 +446,10 @@ const Closing = () => (
           </h2>
         </Reveal>
         <Reveal delay={150}>
-          <p className="mt-10 max-w-md font-eibDisplay text-lg font-semibold uppercase leading-snug tracking-wide">
+          <p className="mt-10 max-w-md font-display text-lg font-semibold uppercase leading-snug tracking-wide">
             If you have any questions or concerns please reach out to our office:
           </p>
-          <p className="mt-8 space-y-1 font-eibDisplay text-lg font-bold uppercase tracking-wide">
+          <p className="mt-8 space-y-1 font-display text-lg font-bold uppercase tracking-wide">
             <a href={`mailto:${EIB.email}`} className="block hover:underline">
               {EIB.email}
             </a>

@@ -113,7 +113,7 @@ The `dataset import` CLI requires being run from inside the Sanity project direc
 
 ## Deployment
 
-- **Site:** Next.js static export (`next build` → `nextjs-app/out/`) deployed to Cloudflare Pages.
+- **Site:** Next.js static export (`next build --webpack` → `nextjs-app/out/`) deployed to Cloudflare Pages. The site builds with webpack rather than Next 16's default Turbopack because Turbopack bundles all CSS into one file for the pages router, which makes every page preload every font (including the Evening in Bethlehem fonts on pages that never use them).
 - **Studio:** `pnpm deploy:studio` pushes the Studio bundle to Sanity's hosted environment.
 
 ### Cloudflare Pages build settings
