@@ -14,6 +14,7 @@ import client from "@/utils/sanity.client";
 import { EIB } from "./content";
 import styles from "./eib.module.css";
 import { eibFontVars } from "./fonts";
+import { isEibOver } from "./timing";
 
 export { styles };
 
@@ -26,12 +27,14 @@ export async function getEibStaticProps() {
   return {
     props: {
       siteSettings,
+      builtOver: isEibOver(),
     },
   };
 }
 
 export interface EibVariantProps {
   siteSettings: any;
+  builtOver: boolean;
 }
 
 // Typed helper for inline CSS custom properties.

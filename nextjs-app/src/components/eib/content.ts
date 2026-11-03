@@ -13,6 +13,9 @@ export const EIB = {
   time: "5:30 – 8:30 PM",
   startsAt: "2026-12-12T17:30:00-05:00",
   endsAt: "2026-12-12T20:30:00-05:00",
+  // The homepage banner and the event page content come down at midnight
+  // (Eastern) after the event. See timing.tsx.
+  showUntil: "2026-12-13T00:00:00-05:00",
 
   venue: "Winona Gospel Church",
   street: "218 Glover Rd",
