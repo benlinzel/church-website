@@ -335,7 +335,7 @@ const Closing = () => (
         </Reveal>
       </div>
       <Reveal from="right" delay={200}>
-        <div className="relative mx-auto max-w-sm bg-[#f6f2ec] px-8 pb-10 pt-12 text-right text-[#1f1a17] shadow-[0_30px_60px_-20px_rgba(0,0,0,0.55)] transition duration-700 hover:-rotate-1">
+        <div className="relative mx-auto mt-24 max-w-sm bg-[#f6f2ec] md:mt-0 px-8 pb-10 pt-12 text-right text-[#1f1a17] shadow-[0_30px_60px_-20px_rgba(0,0,0,0.55)] transition duration-700 hover:-rotate-1">
           <Candle className="absolute bottom-[calc(100%-6px)] left-8 h-32 w-auto" />
           <p className="font-eibSerif text-lg leading-snug">
             Following our <strong>Evening in Bethlehem</strong> event please join us for
