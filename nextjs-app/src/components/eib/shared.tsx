@@ -32,7 +32,6 @@ export async function getEibStaticProps() {
 
 export interface EibVariantProps {
   siteSettings: any;
-  noindex?: boolean;
 }
 
 // Typed helper for inline CSS custom properties.
@@ -74,28 +73,21 @@ const useGlobalScrollVar = () => {
 };
 
 /**
- * Writes the element's scroll progress (0..1) to --p.
- * "through": 0 when the top enters the viewport, 1 when the bottom leaves.
- * "center":  how far down the element a line just below mid-screen has reached.
+ * Writes the element's scroll progress (0..1) to --p: 0 when the top enters
+ * the viewport, 1 when the bottom leaves.
  */
-export const useScrollProgress = (
-  ref: RefObject<HTMLElement | null>,
-  mode: "through" | "center" = "through",
-) => {
+export const useScrollProgress = (ref: RefObject<HTMLElement | null>) => {
   useEffect(() => {
     const el = ref.current;
     if (!el) return undefined;
     return subscribeToFrames(() => {
       const rect = el.getBoundingClientRect();
       const vh = window.innerHeight;
-      const raw = {
-        through: (vh - rect.top) / (rect.height + vh),
-        center: (vh * 0.6 - rect.top) / Math.max(1, rect.height),
-      }[mode];
+      const raw = (vh - rect.top) / (rect.height + vh);
       const p = Math.min(1, Math.max(0, raw));
       el.style.setProperty("--p", p.toFixed(4));
     });
-  }, [ref, mode]);
+  }, [ref]);
 };
 
 const revealFrom = {
@@ -313,11 +305,9 @@ export const FloatingRegister = ({
 export const EibShell = ({
   children,
   className = "",
-  noindex,
 }: {
   children: ReactNode;
   className?: string;
-  noindex?: boolean;
 }) => {
   useGlobalScrollVar();
   const { pathname } = useRouter();
@@ -329,8 +319,6 @@ export const EibShell = ({
       <NextSeo
         title={`${EIB.title} | ${EIB.dateShort}`}
         description={description}
-        noindex={noindex}
-        nofollow={noindex}
         // The design uses fixed light and dark colours. Stop browsers that
         // force a dark theme (Brave Night Mode, Chrome/Samsung "darken
         // websites", Dark Reader) from repainting the cream sections.

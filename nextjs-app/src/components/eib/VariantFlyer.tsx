@@ -352,8 +352,8 @@ const Closing = () => (
   </section>
 );
 
-const VariantFlyer = ({ siteSettings, noindex }: EibVariantProps) => (
-  <EibShell noindex={noindex} className="bg-[#4b5c43] text-[#efe8dc]">
+const VariantFlyer = ({ siteSettings }: EibVariantProps) => (
+  <EibShell className="bg-[#4b5c43] text-[#efe8dc]">
     <Hero logoUrl={siteSettings?.logo ? urlFor(siteSettings.logo).width(600).url() : undefined} />
     <WhatToExpect />
     <Register />

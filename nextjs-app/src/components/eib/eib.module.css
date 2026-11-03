@@ -146,20 +146,6 @@
   animation: glow 4s ease-in-out infinite;
 }
 
-@keyframes walk {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-3px);
-  }
-}
-
-.walk {
-  animation: walk 0.9s ease-in-out infinite;
-}
-
 @keyframes shine {
   from {
     background-position: 200% 0;
@@ -199,12 +185,6 @@
   animation-delay: calc(var(--i, 0) * 35ms + 150ms);
 }
 
-/* Journey path stroke that draws with --p */
-.drawPath {
-  stroke-dasharray: 1;
-  stroke-dashoffset: calc(1 - var(--p, 0));
-}
-
 @media (prefers-reduced-motion: reduce) {
   .reveal,
   .reveal[data-shown="true"] {
@@ -219,7 +199,6 @@
   .twinkle,
   .flame,
   .glow,
-  .walk,
   .shine {
     animation: none;
   }
@@ -230,8 +209,5 @@
   /* elements with inline scroll-linked transforms */
   .scrollFx {
     transform: none !important;
-  }
-  .drawPath {
-    stroke-dashoffset: 0;
   }
 }

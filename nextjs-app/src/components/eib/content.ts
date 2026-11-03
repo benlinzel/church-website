@@ -34,7 +34,7 @@ export const EIB = {
     "Follow the journey of Mary and Joseph through an interactive retelling of the true Christmas story. You can expect to see all of the characters from the biblical narrative, as well as live music and animals!",
   freeNote: "This is a free outdoor & indoor event",
   highlights: [
-    { big: "8", label: "Scenes along the journey" },
+    { big: "5", label: "Scenes along the journey" },
     { big: "Live", label: "Animals" },
     { big: "Live", label: "Music" },
     { big: "Free", label: "Outdoor & indoor event" },
@@ -54,7 +54,7 @@ export const EIB = {
     {
       n: "03",
       title: "Your Journey",
-      body: "You will journey through 8 different scenes including the Gates of Bethlehem, and the Shepherds in the field.",
+      body: "You will journey through 5 different scenes including the Gates of Bethlehem, and the Shepherds in the field.",
     },
     {
       n: "04",
