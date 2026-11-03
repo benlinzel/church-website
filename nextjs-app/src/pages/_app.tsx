@@ -28,7 +28,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
               url: `${process.env.NEXT_PUBLIC_SITE_URL}/assets/images/share.jpg`,
               width: 1200,
               height: 630,
-              alt: `${AppConfig.title}, Sundays at 10:00 am, 218 Glover Road, Stoney Creek`,
+              alt: `Welcome to ${AppConfig.title}`,
             },
           ],
         },
