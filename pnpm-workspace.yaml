@@ -35,22 +35,27 @@ overrides:
   '@types/react': '19.3.0'
   '@types/react-dom': '19.3.0'
 
-  # --- Security pins (critical/high advisories, audited 2026-08-23) ---
+  # --- Security pins (critical/high advisories, audited 2026-08-23, refreshed 2026-11-03) ---
   # Exact pins, not ranges, so resolution stays deterministic. Every version
-  # here was published well over 7 days before being pinned, so it satisfies
+  # here was published at least 7 days before being pinned, so it satisfies
   # minimumReleaseAge above. Re-audit and re-pin rather than letting these float.
-  adm-zip: '0.6.0'
-  brace-expansion: '5.0.9'
+  adm-zip: '0.6.1'
+  brace-expansion: '5.0.12'
+  browserslist: '4.29.5'
+  dompurify: '3.4.17'
   form-data: '4.0.6'
-  'js-yaml@3': '3.15.1'
-  'js-yaml@4': '4.3.1'
+  'js-yaml@3': '3.15.2'
+  'js-yaml@4': '4.3.2'
   linkify-it: '5.0.2'
   'nanoid@3': '3.3.18'
   'nanoid@5': '5.1.16'
   postcss: '8.5.32'
-  sharp: '0.35.3'
+  smol-toml: '1.9.1'
+  sharp: '0.35.5'
   tar: '7.5.22'
-  undici: '6.28.0'
+  # jsdom (pulled in by Studio 6) needs undici 7, so pin each major separately
+  'undici@6': '6.29.1'
+  'undici@7': '7.30.1'
   # Sanity Studio 6 builds with Vite 8; 8.3.5 is the newest 8.x past the release-age gate
   vite: '8.3.5'
   'ws@7': '7.5.13'
