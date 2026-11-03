@@ -2,6 +2,7 @@ import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import Link from "next/link";
 
+import HomeBanner from "@/components/eib/HomeBanner";
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
 import { myPortableTextComponentsNoMargin } from "@/utils/SanityConfig";
@@ -135,6 +136,7 @@ const Index = (props: any) => {
         </div>
       </div>
       {/* <BlockPlayer {...props} /> */}
+      <HomeBanner />
       <div className="items-left flex h-40 flex-col justify-center bg-gradient-to-r from-stone-400 to-stone-400/80 text-lg text-black md:text-2xl">
         <div className="justify-beginning mx-auto">
           <p className="font-medium">{props.siteSettings.serviceHeading}</p>

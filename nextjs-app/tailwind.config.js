@@ -44,6 +44,11 @@ module.exports = {
       },
       fontFamily: {
         Raleway: ['Raleway', ...defaultTheme.fontFamily.sans],
+        // Evening in Bethlehem pages (variables set in components/eib/fonts.ts)
+        eibDisplay: ['var(--font-eib-display)', ...defaultTheme.fontFamily.sans],
+        eibSerif: ['var(--font-eib-serif)', ...defaultTheme.fontFamily.serif],
+        eibElegant: ['var(--font-eib-elegant)', ...defaultTheme.fontFamily.serif],
+        eibBody: ['var(--font-eib-body)', ...defaultTheme.fontFamily.sans],
       },
     },
   },
