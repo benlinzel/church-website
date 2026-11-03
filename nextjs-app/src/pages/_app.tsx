@@ -22,9 +22,19 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
           siteName: AppConfig.site_name,
           title: AppConfig.title,
           description: AppConfig.description,
+          // 1200x630 link-preview card for every page; /eib has its own
+          images: [
+            {
+              url: `${process.env.NEXT_PUBLIC_SITE_URL}/assets/images/share.jpg`,
+              width: 1200,
+              height: 630,
+              alt: `${AppConfig.title}, Sundays at 10:00 am, 218 Glover Road, Stoney Creek`,
+            },
+          ],
         },
         title: AppConfig.title,
         description: AppConfig.description,
+        twitter: { cardType: "summary_large_image" },
       })}
     </Head>
     <div className={`${siteFontVars} ${SITE_FONTS}`}>
