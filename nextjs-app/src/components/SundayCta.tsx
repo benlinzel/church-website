@@ -90,21 +90,21 @@ const SundayCta = ({
     after: { href: youtubeLink, lead: "Missed today's service?", action: "Watch it" },
   }[phase];
 
+  // the border shows the status (a real border: Tailwind's ring is a
+  // box-shadow, which the pulse animates): amber before, pulsing amber just before the
+  // start, pulsing red while live, quiet white after
+  const border = {
+    before: "border-amber-400/70",
+    soon: "border-amber-400 animate-border-pulse [--pulse:rgb(251_191_36/0.6)]",
+    live: "border-red-500 animate-border-pulse [--pulse:rgb(239_68_68/0.65)]",
+    after: "border-white/30",
+  }[phase];
+
   return (
     <a
       href={href}
-      className="group mb-6 inline-flex items-center gap-2.5 rounded-full bg-black/45 py-2 pl-3.5 pr-4 text-sm text-white ring-1 ring-inset ring-white/20 backdrop-blur-md transition hover:ring-amber-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400 motion-reduce:transition-none md:mb-8 md:text-base"
+      className={`group mb-6 inline-flex items-center gap-2.5 rounded-full bg-black/45 px-4 py-2 text-sm border-[1.5px] text-white backdrop-blur-md transition-colors hover:bg-black/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400 motion-reduce:animate-none motion-reduce:transition-none md:mb-8 md:text-base ${border}`}
     >
-      <span aria-hidden className="relative flex h-2.5 w-2.5">
-        {(phase === "soon" || phase === "live") && (
-          <span
-            className={`absolute inline-flex h-full w-full animate-ping rounded-full opacity-75 motion-reduce:animate-none ${phase === "live" ? "bg-red-500" : "bg-amber-400"}`}
-          />
-        )}
-        <span
-          className={`relative inline-flex h-2.5 w-2.5 rounded-full ${phase === "live" ? "bg-red-500" : "bg-amber-400"}`}
-        />
-      </span>
       <span>{lead}</span>
       <span className="whitespace-nowrap font-semibold text-amber-400 group-hover:underline">
         {action} <span aria-hidden>→</span>
