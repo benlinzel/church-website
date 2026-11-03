@@ -1,6 +1,6 @@
 import {visionTool} from '@sanity/vision'
 import {defineConfig} from 'sanity'
-import {deskTool} from 'sanity/desk'
+import {structureTool} from 'sanity/structure'
 import {schemaTypes} from './schemas'
 
 // Define the actions that should be available for singleton documents
@@ -17,7 +17,7 @@ export default defineConfig({
   dataset: process.env.SANITY_STUDIO_DATASET!,
 
   plugins: [
-    deskTool({
+    structureTool({
       structure: (S) =>
         S.list()
           .title('Content')

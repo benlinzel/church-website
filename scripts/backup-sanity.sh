@@ -32,10 +32,12 @@ rm -f "${BACKUP_FILE}"
   cd "${STUDIO_DIR}"
   # sanity.cli.ts reads SANITY_STUDIO_PROJECT_ID/DATASET from env;
   # mirror them in so loading the CLI config doesn't crash on undefined.
+  # The CLI major must match the Studio's `sanity` version in package.json:
+  # an older CLI refuses to start next to a newer installed Studio.
   SANITY_STUDIO_PROJECT_ID="${SANITY_PROJECT_ID}" \
   SANITY_STUDIO_DATASET="production" \
   SANITY_AUTH_TOKEN="${SANITY_TOKEN}" \
-    npx --yes sanity@4 dataset export production "${BACKUP_FILE}" \
+    npx --yes sanity@6.20.0 dataset export production "${BACKUP_FILE}" \
     --project "${SANITY_PROJECT_ID}"
 )
 
