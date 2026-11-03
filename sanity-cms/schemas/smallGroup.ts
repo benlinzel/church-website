@@ -1,14 +1,19 @@
-import { defineField, defineType } from 'sanity'
+import {UsersIcon} from '@sanity/icons/Users'
+import {defineField, defineType} from 'sanity'
+
+import {orderByOrder, orderField} from './fields'
 
 export default defineType({
   name: 'smallGroup',
   title: 'Small Group',
   type: 'document',
+  icon: UsersIcon,
   fields: [
     defineField({
       name: 'title',
       title: 'Title',
       type: 'string',
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'contact',
@@ -28,19 +33,13 @@ export default defineType({
     defineField({
       name: 'description',
       title: 'Description',
-      type: 'string',
+      type: 'text',
+      rows: 3,
     }),
-    defineField({
-      name: 'order',
-      title: 'Order',
-      type: 'number',
-    }),
+    orderField,
   ],
-  orderings: [
-    {
-      title: 'Order',
-      name: 'order',
-      by: [{field: 'order', direction: 'asc'}],
-    },
-  ],
+  orderings: [orderByOrder],
+  preview: {
+    select: {title: 'title', subtitle: 'time'},
+  },
 })

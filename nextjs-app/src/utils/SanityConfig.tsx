@@ -11,7 +11,7 @@ export const myPortableTextComponentsNoMargin = {
         <div className="relative my-4 h-[400px] w-full">
           <Image
             src={urlFor(value?.asset?._ref).width(450).height(450).url()}
-            alt={"image"}
+            alt={value?.alt ?? ""}
             fill
             className="object-cover rounded-lg"
             unoptimized
@@ -55,7 +55,7 @@ export const myPortableTextComponents = {
         <div className="relative my-4 h-[400px] w-full">
           <Image
             src={urlFor(value?.asset?._ref).width(1200).height(900).url()}
-            alt={"image"}
+            alt={value?.alt ?? ""}
             fill
             className="object-cover rounded-lg"
             unoptimized

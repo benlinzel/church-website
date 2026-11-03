@@ -1,31 +1,30 @@
-import { defineField, defineType } from 'sanity'
+import {BookIcon} from '@sanity/icons/Book'
+import {defineField, defineType} from 'sanity'
+
+import {orderByOrder, orderField} from './fields'
 
 export default defineType({
   name: 'faithArticle',
-  title: 'Faith Article',
+  title: 'Article of Faith',
   type: 'document',
+  icon: BookIcon,
   fields: [
     defineField({
       name: 'title',
       title: 'Title',
       type: 'string',
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'body',
       title: 'Body',
       type: 'blockContent',
     }),
-    defineField({
-      name: 'order',
-      title: 'Order',
-      type: 'number',
-    }),
+    orderField,
   ],
-  orderings: [
-    {
-      title: 'Order',
-      name: 'order',
-      by: [{field: 'order', direction: 'asc'}],
-    },
-  ],
+  orderings: [orderByOrder],
+  preview: {
+    select: {title: 'title', order: 'order'},
+    prepare: ({title, order}) => ({title, subtitle: order != null ? `#${order}` : undefined}),
+  },
 })

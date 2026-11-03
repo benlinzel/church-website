@@ -1,64 +1,30 @@
 import {visionTool} from '@sanity/vision'
 import {defineConfig} from 'sanity'
-import {deskTool} from 'sanity/desk'
+import {structureTool} from 'sanity/structure'
+
 import {schemaTypes} from './schemas'
+import {singletonTypes, structure} from './structure'
 
-// Define the actions that should be available for singleton documents
+// Singletons can only be published, have changes discarded, or be restored:
+// no duplicate or delete.
 const singletonActions = new Set(['publish', 'discardChanges', 'restore'])
-
-// Define the singleton document types
-const singletonTypes = new Set(['siteSettings', 'youthMinistry', 'childrensMinistry'])
 
 export default defineConfig({
   name: 'default',
-  title: 'Content Studio',
+  title: 'Winona Gospel Church',
 
   projectId: process.env.SANITY_STUDIO_PROJECT_ID!,
   dataset: process.env.SANITY_STUDIO_DATASET!,
 
-  plugins: [
-    deskTool({
-      structure: (S) =>
-        S.list()
-          .title('Content')
-          .items([
-            S.documentTypeListItem('upcomingEvent').title('Upcoming Events'),
-            S.documentTypeListItem('smallGroup').title('Small Groups'),
-
-            S.listItem()
-              .title('Youth Ministry')
-              .id('youthMinistry')
-              .child(S.document().schemaType('youthMinistry').documentId('youthMinistry')),
-
-            S.listItem()
-              .title("Children's Ministry")
-              .id('childrensMinistry')
-              .child(S.document().schemaType('childrensMinistry').documentId('childrensMinistry')),
-
-            S.documentTypeListItem('teamMember').title('Team Members'),
-            // S.documentTypeListItem('mission').title('Missions'),
-            S.documentTypeListItem('faithArticle').title('Articles of Faith'),
-            S.documentTypeListItem('statement').title('Statements We Support'),
-
-            S.listItem()
-              .title('Site Settings')
-              .id('siteSettings')
-              .child(S.document().schemaType('siteSettings').documentId('siteSettings')),
-          ]),
-    }),
-    visionTool(),
-  ],
+  plugins: [structureTool({structure}), visionTool()],
 
   schema: {
     types: schemaTypes,
-
-    // Filter out singleton types from the global "New document" menu options
+    // keep singletons out of the global "New document" menu
     templates: (templates) => templates.filter(({schemaType}) => !singletonTypes.has(schemaType)),
   },
 
   document: {
-    // For singleton types, filter out actions that are not explicitly included
-    // in the `singletonActions` list defined above
     actions: (input, context) =>
       singletonTypes.has(context.schemaType)
         ? input.filter(({action}) => action && singletonActions.has(action))

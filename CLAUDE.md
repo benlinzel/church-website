@@ -2,8 +2,8 @@
 
 Monorepo for the church site. Two workspaces:
 
-- `nextjs-app/` — Next.js 15 static-export site, deployed to Cloudflare Pages
-- `sanity-cms/` — Sanity v4 Studio for content authoring
+- `nextjs-app/` — Next.js 16 static-export site, deployed to Cloudflare Pages
+- `sanity-cms/` — Sanity v6 Studio for content authoring
 
 Shared tooling and the Sanity backup script live at the root.
 
@@ -59,7 +59,7 @@ The root scripts use `pnpm -C <dir>` rather than `--filter` because directory-sc
 
 ### Studio env vars
 
-`sanity-cms/sanity.cli.ts` and `sanity-cms/sanity.config.ts` read `SANITY_STUDIO_PROJECT_ID` and `SANITY_STUDIO_DATASET` from the environment (with a non-null TS assertion). Those vars must be set in `sanity-cms/.env` (or exported) before `pnpm dev:studio` or `pnpm build:studio` will work. The backup script auto-mirrors `SANITY_PROJECT_ID` → `SANITY_STUDIO_PROJECT_ID` when invoking `sanity@4 dataset export` so the CLI config can load without crashing.
+`sanity-cms/sanity.cli.ts` and `sanity-cms/sanity.config.ts` read `SANITY_STUDIO_PROJECT_ID` and `SANITY_STUDIO_DATASET` from the environment (with a non-null TS assertion). Those vars must be set in `sanity-cms/.env` (or exported) before `pnpm dev:studio` or `pnpm build:studio` will work. The backup script auto-mirrors `SANITY_PROJECT_ID` → `SANITY_STUDIO_PROJECT_ID` when invoking `sanity dataset export` so the CLI config can load without crashing.
 
 ## Sanity backups
 
@@ -104,12 +104,12 @@ s3cmd get s3://$CEPH_BUCKET/$SITE_NAME/production-YYYY-MM-DD.tar.gz
 cd sanity-cms
 SANITY_STUDIO_PROJECT_ID=$SANITY_PROJECT_ID \
 SANITY_STUDIO_DATASET=production \
-SANITY_AUTH_TOKEN=... npx sanity@4 dataset import \
+SANITY_AUTH_TOKEN=... npx sanity@6.20.0 dataset import \
   ../production-YYYY-MM-DD.tar.gz production \
   --project $SANITY_PROJECT_ID --replace
 ```
 
-The `dataset import` CLI requires being run from inside the Sanity project directory, same as export.
+The `dataset import` CLI requires being run from inside the Sanity project directory, same as export. Keep the CLI version in the backup script and this command in step with the Studio's `sanity` version: an older CLI refuses to start next to a newer installed Studio.
 
 ## Search engines and AI (deliberately opted out)
 
