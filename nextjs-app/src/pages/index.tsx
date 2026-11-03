@@ -70,21 +70,23 @@ const Index = (props: any) => {
 
       <HomeBanner builtOver={props.eibBuiltOver} />
 
-      <section className="border-b border-white/10 bg-black/20">
+      {/* a light band between the dark hero and footer; opted out of
+          browser-forced dark modes, which would repaint it */}
+      <section className="bg-[#f3ece1] text-stone-900" style={{ colorScheme: "only light" }}>
         <div className="mx-auto flex max-w-[1200px] flex-col gap-4 px-6 py-10 sm:flex-row sm:items-end sm:justify-between md:py-14">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-amber-500">
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-amber-700">
               {siteSettings.serviceHeading}
             </p>
-            <p className="mt-2 font-display text-3xl font-semibold text-white md:text-4xl">
+            <p className="mt-2 font-display text-3xl font-semibold text-stone-900 md:text-4xl">
               {siteSettings.serviceTime}
             </p>
           </div>
           <Link
             href={siteSettings.addressLink}
-            className="group text-white/80 hover:text-white md:text-lg"
+            className="group text-stone-700 hover:text-stone-900 md:text-lg"
           >
-            <span className="decoration-amber-500 underline-offset-4 group-hover:underline">
+            <span className="decoration-amber-600 underline-offset-4 group-hover:underline">
               218 Glover Road, Stoney Creek, ON L8E 5H6
             </span>
             <Image
