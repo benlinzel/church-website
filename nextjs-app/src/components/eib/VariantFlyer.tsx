@@ -481,7 +481,7 @@ const Closing = () => (
             {EIB.christmasEve.title}
           </p>
           <p className="mt-4 font-eibSerif text-xs uppercase tracking-[0.25em]">
-            December 24<sup>th</sup> at 6PM
+            December 24<sup>th</sup> at 6:30PM
           </p>
         </div>
       </Reveal>

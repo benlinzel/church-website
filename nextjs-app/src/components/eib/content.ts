@@ -79,7 +79,7 @@ export const EIB = {
   christmasEve: {
     lead: "Following our Evening in Bethlehem event please join us for",
     title: "Christmas Eve Candle Light Service",
-    when: "December 24th at 6 PM",
+    when: "December 24th at 6:30 PM",
   },
 
   images: {
