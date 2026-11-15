@@ -327,7 +327,7 @@ const ParkingRoad = () => {
 
   return (
     <a
-      href={EIB.parkingMapsUrl}
+      href={EIB.mapsUrl}
       target="_blank"
       rel="noopener noreferrer"
       className="group block border-2 border-[#efe8dc]/35 px-5 pt-5 transition duration-500 hover:border-[#efe8dc]/70 md:px-8 md:pt-7"
@@ -338,7 +338,7 @@ const ParkingRoad = () => {
             Parking
           </p>
           <p className="mt-1 font-display text-2xl font-extrabold uppercase leading-none tracking-[-0.03em] md:text-4xl">
-            Winona Vine Estates
+            North Side of the Church
           </p>
         </div>
         <span className="rounded-full bg-[#efe8dc] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-[#7a1f1a] shadow-lg transition group-hover:-translate-y-0.5 group-hover:bg-white">
