@@ -21,9 +21,6 @@ export const EIB = {
   street: "218 Glover Rd",
   city: "Stoney Creek",
   mapsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(VENUE_QUERY)}`,
-  parkingMapsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-    "Winona Vine Estates, Stoney Creek, ON",
-  )}`,
   calendarUrl:
     "https://calendar.google.com/calendar/render?action=TEMPLATE" +
     `&text=${encodeURIComponent("An Evening in Bethlehem")}` +
@@ -46,7 +43,7 @@ export const EIB = {
     {
       n: "01",
       title: "Parking",
-      body: "Parking will be available at Winona Vine Estates.",
+      body: "Parking will be available on the North Side of the church.",
     },
     {
       n: "02",
